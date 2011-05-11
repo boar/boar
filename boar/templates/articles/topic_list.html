@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load compress %}
+{% block title %}{{ section.tag_name }} &mdash; {{ section }} &mdash; {{ block.super }}{% endblock %}
+{% block extra_js %}<script type="text/javascript" charset="utf-8">
+    var section = '{{ section.slug }}';
+</script>
+{% compress js %}<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}static/js/src/jquery-ui-1.7.1.custom.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}static/js/src/selectToUISlider.jQuery.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}static/js/src/topics.js"></script>
+{% endcompress %}{% endblock %}
+{% block extra_css %}{% compress css %}<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/src/ui-slider/ui.core.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/src/ui-slider/ui.slider.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/src/ui-slider/ui.slider.extras.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/src/ui-slider/ui.theme.css" type="text/css" media="screen" charset="utf-8" />{% endcompress %}{% endblock %}
+{% block content %}<h2>{{ section }}: {{ section.tag_name }}</h2>
+<div id="cloud-controls"><select name="month" id="month">
+    {% for month in months %}{% if forloop.first %}<optgroup label="{{ month|date:"Y" }}">{% else %}{% ifchanged %}</optgroup>
+    <optgroup label="{{ month|date:"Y" }}">{% endifchanged %}{% endif %}
+        <option value="{{ month|date:"m/Y" }}"{% ifequal month date %} selected="selected"{% endifequal %}>{{ month|date:"M Y" }}</option>
+    {% endfor %}
+</select></div>
+<div id="cloud">{% include "articles/topic_cloud.html" %}</div>
+{% endblock %}

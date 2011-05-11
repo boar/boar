@@ -1,0 +1,1 @@
+{% load articles %}{% block article-rightcolumn %}{% with 1 as in_block %}{% for topic in topics|slice:":2" %}{% if forloop.first %}{% include "articles/blocks/topic.html" %}{% else %}{% with 1 as no_image %}{% include "articles/blocks/topic.html" %}{% endwith %}{% endif %}{% endfor %}{% endwith %}{% section_block section '3' %}{% endblock %}

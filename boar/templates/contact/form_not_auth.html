@@ -1,0 +1,6 @@
+{% extends "base.html" %} 
+{% block title %}Contact: {{ name }} &mdash; {{ block.super }}{% endblock %}
+{% block content %}
+    <h2>Contact: {{ name }}</h2>
+    <p>You need to <a href="{% url accounts %}?next={{ request.path|urlencode }}">join or sign in</a> to send messages. Don't worry, we'll redirect you straight back here!</p>
+{% endblock %}

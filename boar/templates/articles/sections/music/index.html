@@ -1,0 +1,59 @@
+{% extends "articles/sections/default.html" %}
+{% load articles %}
+{% load markup %}
+{% load pagination_tags %}
+{% load thumbnail %}
+{% load typogrify %}
+{% load uploads %}
+{% block content %}<h2>{{ section }}{% if date %} <small>{{ date|date:"F Y" }}</small>{% endif %}</h2>
+{% autopaginate articles 25 as paginated_articles %}
+{% ifequal featured|length 3 %}
+{% with featured.0 as a %}<div class="article-block-big-title half-column border">
+    <h2><a href="{{ featured.0.get_absolute_url }}">{{ featured.0.title|typogrify }}</a></h2>
+    <small>{% include "articles/snippets/date.html" %}</small>
+</div>{% endwith %}
+
+{% with featured.1 as a %}<div class="article-block-title quarter-column border">
+    <h3><a href="{{ featured.1.get_absolute_url }}">{{ featured.1.title|typogrify }}</a>{% if featured.1.musicalbum_metadata.artist %} <small>{{ featured.1.musicalbum_metadata.artist }}</small>{% endif %}</h3>
+    <small>{% include "articles/snippets/date.html" %}</small>
+</div>{% endwith %}
+{% with featured.2 as a %}<div class="article-block-title quarter-column">
+    <h3><a href="{{ featured.2.get_absolute_url }}">{{ featured.2.title|typogrify }}</a>{% if featured.2.musicalbum_metadata.artist %} <small>{{ featured.2.musicalbum_metadata.artist }}</small>{% endif %}</h3>
+    <small>{% include "articles/snippets/date.html" %}</small>
+</div>{% endwith %}
+
+
+<div class="article-block-big half-column border">
+    {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "half" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+    {{ featured.0.get_summary|markdown|typogrify }}
+</div>
+
+<div class="article-block quarter-column border">
+    {% if featured.1.musicalbum_metadata.album_art %}<a href="{{ featured.1.get_absolute_url }}"><img src="{% thumbnail featured.1.musicalbum_metadata.album_art 200x200 crop %}" alt="{{ featured.1 }}" height="200" width="200" /></a>{% endif %}
+    {{ featured.1.get_summary|markdown|typogrify }}
+</div>
+
+<div class="article-block quarter-column">
+    {% if featured.2.musicalbum_metadata.album_art %}<a href="{{ featured.2.get_absolute_url }}"><img src="{% thumbnail featured.2.musicalbum_metadata.album_art 200x200 crop %}" alt="{{ featured.2 }}" height="200" width="200" /></a>{% endif %}
+    {{ featured.2.get_summary|markdown|typogrify }}
+</div>
+{% endifequal %}
+<div class="block-column border">
+    <h3><a href="{% url section_music_features %}{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">Features</a></h3>
+    {% if sub_sections.features.articles %}<ul class="article-list" >{% with 1 as in_block %}{% for a in sub_sections.features.articles|slice:":10" %}{% article_list_bit a %}{% endfor %}{% endwith %}
+    </ul>{% else %}<p>Nothing here!</p>{% endif %}
+    <div class="more"><a href="{% url section_music_features %}{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">More features...</a></div>
+</div>
+{% block section-column2 %}<div class="block-column border">
+    <h3><a href="{% url section_music_albums %}{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">Albums</a></h3>
+    {% if sub_sections.albums.articles %}<ul class="article-list" >{% for a in sub_sections.albums.articles|slice:":10" %}{% article_list_bit a %}{% endfor %}
+    </ul>{% else %}<p>Nothing here!</p>{% endif %}
+    <div class="more"><a href="{% url section_music_albums %}{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">More album reviews...</a></div>
+</div>{% endblock %}
+{% block section-column3 %}<div class="block-column">
+    {% archive_block all_articles date section.get_absolute_url %}
+    <h3><a href="{% url section_music_live %}{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">Live</a></h3>
+    {% if sub_sections.live.articles %}<ul class="article-list" >{% with 1 as in_block %}{% for a in sub_sections.live.articles|slice:":10" %}{% article_list_bit a %}{% endfor %}{% endwith %}
+    </ul>{% else %}<p>Nothing here!</p>{% endif %}
+    <div class="more"><a href="{% url section_music_live %}{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">More live reviews...</a></div>
+</div>{% endblock section-column3 %}{% endblock content %}

@@ -1,0 +1,2 @@
+{% extends "articles/list_bit/default.html" %}
+{% block list-bit-headline %}{{ block.super }}{% if a.musiclive_metadata.location %} <small>{{ a.musiclive_metadata.location }}</small>{% endif %}{% endblock %}

@@ -1,0 +1,2 @@
+{% extends "articles/list_bit/default.html" %}
+{% block list-bit-headline %}{{ block.super }}{% if a.book_metadata.author %} <small>{{ a.book_metadata.author }}</small>{% endif %}{% endblock %}

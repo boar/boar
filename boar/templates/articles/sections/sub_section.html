@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load articles %}
+{% load pagination_tags %}
+{% block title %}{{ sub_section }}{% if date %} ({{ date|date:"F Y" }}){% endif %} &mdash; {{ section }} &mdash; {{ block.super }}{% endblock %}
+{% block content %}
+<h2><a href="{{ section.get_absolute_url }}{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">{{ section }}</a>: {{ sub_section }}{% if date %} <small>{{ date|date:"F Y" }}</small>{% endif %}</h2>
+<div class="half-column border">{% autopaginate articles 25 as paginated_articles %}
+    {% if paginated_articles %}<ul class="article-list">{% for a in paginated_articles %}{% article_list_bit a %}{% endfor %}
+    </ul>{% else %}<p>Nothing here!</p>{% endif %}
+    {% paginate %}
+</div>
+<div class="quarter-column border">
+    {% if related %}<div class="block">
+        <h3>Related</h3>
+        <div>{% for topic in related %}{% if not forloop.first %} &middot; {% endif %}<a href="{% url articles_view_topic section.slug, topic.slug %}">{{ topic.name }}</a>{% endfor %}</div>
+    </div>{% endif %}
+    {% if articles %}{% archive_block all_articles date absolute_url %}{% endif %}
+    {% block middle_column %}{% endblock %}
+</div>
+<div class="quarter-column">
+    {% block right_column %}{% endblock %}
+</div>{% endblock %}

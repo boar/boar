@@ -1,0 +1,51 @@
+{% extends "articles/sections/default.html" %}
+{% load articles %}
+{% load cache %}
+{% load feeds %}
+{% load markup %}
+{% load typogrify %}
+{% load uploads %}
+{% block section-featured %}
+{% ifequal page_obj.number 1 %}{% if featured.0 and featured.1 and featured.2 %}
+{% with featured.0 as a %}<div class="clearfix"><div class="block-column border article-block-title">
+    <h3><a href="{{ featured.0.get_absolute_url }}">{{ featured.0.title|typogrify }}</a></h3>
+    <small>{% include "articles/snippets/date.html" %}</small>
+</div>{% endwith %}
+{% with featured.1 as a %}<div class="block-column border article-block-title">
+    <h3><a href="{{ featured.1.get_absolute_url }}">{{ featured.1.title|typogrify }}</a></h3>
+    <small>{% include "articles/snippets/date.html" %}</small>
+</div>{% endwith %}
+{% with featured.2 as a %}<div class="block-column article-block-title">
+    <h3><a href="{{ featured.2.get_absolute_url }}">{{ featured.2.title|typogrify }}</a></h3>
+    <small>{% include "articles/snippets/date.html" %}</small>
+</div></div>{% endwith %}
+
+<div class="clearfix">
+    <div class="block-column border article-block">
+        {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "block" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+        {{ featured.0.get_summary|markdown|typogrify }}
+    </div>
+    <div class="block-column border article-block">
+        {% if featured.1.image %}<a href="{{ featured.1.get_absolute_url }}"><img src="{% upload_thumbnail featured.1.image "block" %}" alt="{{ featured.1.image }}" /></a>{% endif %}
+        {{ featured.1.get_summary|markdown|typogrify }}
+    </div>
+    <div class="block-column article-block">
+        {% if featured.2.image %}<a href="{{ featured.2.get_absolute_url }}"><img src="{% upload_thumbnail featured.2.image "block" %}" alt="{{ featured.2.image }}" /></a>{% endif %}
+        {{ featured.2.get_summary|markdown|typogrify }}
+    </div>
+</div>{% endif %}{% endifequal %}
+{% endblock %}
+{% block section-column2 %}<div class="quarter-column border">
+    {% archive_block all_articles date section.get_absolute_url %}
+    {% with 1 as no_image %}{% for topic in topics|slice:":4" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}
+{% block section-column3 %}<div class="quarter-column">
+    {% cache 1800 filmsoc_feed %}{% parse_feed "http://www.filmsoc.warwick.ac.uk/automatic/comingsoon/rss" as filmsoc_feed %}{% if filmsoc_feed.entries %}<div class="block">
+        <h3><a href="http://www.filmsoc.warwick.ac.uk/">Student Cinema</a></h3>
+        <ul class="link-list">{% for entry in filmsoc_feed.entries|slice:":5" %}
+            <li{% if forloop.last %} class="last"{% endif %}><a href="{{ entry.link }}">{{ entry.title|filmsoc_title|typogrify }}</a> <small>{{ entry.title|filmsoc_date }}</small></li>{% endfor %}
+        </ul>
+    </div>{% endif %}{% endcache %}
+    {% include "articles/blocks/topics.html" %}
+    {% with 1 as no_image %}{% for topic in topics|slice:"4:6" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}

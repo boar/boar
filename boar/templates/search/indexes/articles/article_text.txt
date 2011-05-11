@@ -1,0 +1,7 @@
+{% load markup %}{{ object.title }}
+
+{% for tag in object.tags_manager.all %}{{ tag.name }} {% endfor %}
+
+{{ object.summary|markdown }}
+
+{{ object.body|markdown }}

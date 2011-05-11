@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load articles %}
+{% load markup %}
+{% load typogrify %}
+{% load thumbnail %}
+{% load uploads %}
+{% block title %}{{ block.super }} &mdash; The University of Warwick Students&rsquo; Newspaper{% endblock %}
+{% block body_id %}home{% endblock %}
+{% block extra_head %}{{ block.super }}
+<meta property="og:title" content="The Boar" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://theboar.org/" />
+<meta property="og:image" content="{{ MEDIA_URL}}static/img/boar-head.png" />
+<meta name="description" property="og:description" content="The University of Warwick students&rsquo; newspaper, published fortnightly on Tuesday." />
+{% endblock %}
+{% block content %}
+<div class="content-column border">
+    {% with featured.0 as a %}<div class="article-block-big">
+        <h2><a href="{{ featured.0.get_absolute_url }}">{{ featured.0.title|typogrify }}</a></h2>
+        <small>{% include "articles/snippets/date.html" %}</small>
+        {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "main" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+        {{ featured.0.get_summary|markdown|typogrify }}
+    </div>{% endwith %}
+
+    {% with featured.1 as a %}<div class="block-column border article-block">
+        <h3><a href="{{ featured.1.get_absolute_url }}">{{ featured.1.title|typogrify }}</a></h3>
+        <small>{% include "articles/snippets/date.html" %}</small>
+        {{ featured.1.get_summary|markdown|typogrify }}
+    </div>{% endwith %}
+    {% with featured.2 as a %}<div class="block-column article-block">
+        <h3><a href="{{ featured.2.get_absolute_url }}">{{ featured.2.title|typogrify }}</a></h3>
+        <small>{% include "articles/snippets/date.html" %}</small>
+        {{ featured.2.get_summary|markdown|typogrify }}
+    </div>{% endwith %}
+</div>
+
+<div class="blockplusone-column">
+    <div class="block">
+        <h3 class="border-news"><a href="/news/">Latest news</a></h3>
+        <ul class="link-list">{% for a in news|slice:":6" %}
+            <li{% if forloop.last %} class="last"{% endif %}><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a> <small>{% include "articles/snippets/date.html" %}</small></li>{% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="block-column border">
+  {% section_block "comment" %}
+  {% section_block "sport" %}
+  {% section_block "money" %}
+  {% section_block "games" %}
+  {% section_block "film" %}
+  {% section_block "science" %}
+</div>
+<div class="block-column border">
+  {% section_block "features" %}
+  {% section_block "lifestyle" %}
+  {% section_block "music" %}
+  {% section_block "tv" %}
+  {% section_block "travel" %}
+  {% section_block "books" %}
+  {% section_block "arts" %}
+</div>
+<div class="blockplusone-column">
+  <div class="block archive-block">
+    <h3><a href="{{ latest_issue.get_absolute_url }}">Newspaper</h3>
+    <a href="{{ latest_issue.get_absolute_url }}"><img src="{% thumbnail latest_issue.get_front_page.image 250x10000 %}" alt="{{ issue.title }}" width="250" /></a>
+  </div>
+
+  {% latest_comments_block %}
+
+</div>
+
+{% endblock %}

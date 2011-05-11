@@ -1,0 +1,1250 @@
+//***********
+// THE STYLE 
+//***********
+
+// Text things
+line_height = 20px
+font_size = 14px
+
+// Columns
+page_width = 950px
+border_width = 50px
+block_width = (($page_width - $border_width * 2) / 3).round()
+content_width = $block_width * 2 + $border_width
+half_width = ($page_width - $border_width) / 2
+quarter_width = ($half_width - $border_width) / 2
+threequarter_width = $quarter_width * 3 + $border_width * 2
+
+// Colours
+line_colour = #EEE
+small_colour = #999
+link_color = black
+link_hover_color = #555
+
+// Section colours
+arts_colour = #FF6617
+books_colour = #0092D7
+comment_colour = #FFAA00
+features_colour = #45BB2C
+film_colour = #7C1A26
+games_colour = #008078
+lifestyle_colour = #261879
+music_colour = #E02B30
+money_colour = #FFF500
+news_colour = #B81B15
+science_colour = #00B5B2
+sport_colour = #008A37
+travel_colour = #1C1248
+tv_colour = #891C88
+
+// Reset
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td:
+    margin: 0
+    padding: 0
+    border: 0
+    vertical-align: baseline
+    font->
+        weight: inherit
+        style: inherit
+        size: 100%
+        family: inherit
+
+// General tags
+body:
+    line-height: $line_height
+    background: #666
+    color: #000
+    // http://www.komodomedia.com/blog/2009/03/safari-text-shadow-anti-aliasing-css-hack/
+    text-shadow: rgba(0,0,0,0.01) 0 0 0
+    font->
+        size: $font_size
+        family: Georgia, serif
+
+// Tabley things (stolen from blueprint, no shame)
+table:
+    border->
+        collapse: separate
+        spacing: 0
+    margin-bottom: $line_height
+    width: 100%
+
+th:
+    font-weight: bold
+
+thead th:
+    background: #c3d9ff
+
+caption, th, td:
+    text-align: left
+    font-weight: normal
+    padding: 4px 10px 4px 5px
+
+table, td, th: 
+    vertical-align: middle
+
+tr.even td:
+    background: #e5ecf9
+
+tfoot:
+    font-style: italic
+
+caption:
+    background: #eee
+
+// Remove possible quote marks (") from <q>, <blockquote>.
+blockquote:before, blockquote:after, q:before, q:after:
+    content: '"' + '"'
+blockquote, q:
+    quotes: '"' + '"' + ' ' + '"' + '"'
+
+a:
+    color: $link_color
+    text-decoration: underline
+    &:focus, &:hover:
+        color: $link_hover_color
+    img:
+        border: none
+
+
+hr:
+    background: $line_colour
+    color: $line_colour
+    clear: both
+    float: none
+    width: 100%
+    height: 1px
+    margin: 0 0 $line_height - 1
+    border: none
+    
+    
+
+hr.space:
+    background: white
+    color: white
+
+small.date, .article-block-big small, .article-block-big-title small, #article-header small:
+    font-size: 12px
+    color: $small_colour
+
+.article-block small, .article-block-title small, .article-list > li > small, .link-list > li > small:
+    font-style: italic
+    color: $small_colour
+    font-size: 10px
+    display: block
+
+h1, h2, h3, h4, h5, h6:
+    font-weight: normal
+    //text-shadow: #CCC 1px 1px 1px
+    img:
+        margin: 0
+    a:
+        //color: #111
+        text-decoration: none
+        &:hover:
+            text->
+                //shadow: white 1px 1px 1px
+                decoration: underline
+    
+    .amp:
+        color: #666
+        font-size: 1.05em
+        font-family: "Warnock Pro", "Goudy Old Style", "Palatino", "Book Antiqua", serif
+        font-style: italic
+    
+    small:
+        color: #bbb
+        padding-left: 2px
+        a:
+            text-decoration: underline
+            color: #bbb
+    
+h1:
+    float: left
+    margin: 20px 0 0 0
+
+h2, h3:
+    line-height: $line_height * 2
+    border-bottom: 1px solid black
+    margin-bottom: $line_height - 1
+
+h2:
+    font-size: 24px
+    small:
+        font-size: 18px
+
+h3:
+    font-size: 20px
+    small:
+        font-size: 16px
+    
+h4:
+    font-size: 18px
+    margin-bottom: $line_height
+
+h2.headline, .article-block-big h2, .article-block-big-title h2:
+    font-size: 30px
+    border: 0
+    margin: 0
+    padding: 0
+    small:
+        padding-left: 4px
+        color: $small_colour
+        font-size: 18px
+        font-style: normal
+        display: inline
+
+
+h3.headline, .article-list h3, .article-block h3, .article-block-title h3:
+    font-size: 17px
+    border: 0
+    line-height: $line_height
+    margin-bottom: $line_height
+    small:
+        padding-left: 4px
+        color: $small_colour
+        font-size: 12px
+        font-style: normal
+        display: inline
+    
+    img.audio-icon:
+        position: relative
+        top: 2px
+
+p:
+    margin: 0 0 $line_height
+    text-align: justify
+
+p.donthyphenate:
+    text-align: left
+
+.left:
+    float: left
+    margin: $line_height $line_height $line_height 0
+    padding: 0
+
+.right:
+    float: right
+    margin: $line_height 0 $line_height $line_height
+
+.top:
+    margin-top: 0
+
+ul, ol:
+    margin: 0 $line_height $line_height $line_height
+
+ul:
+    list-style-type: square
+ol:
+    list-style-type: decimal
+
+dl:
+    margin-bottom: $line_height
+dl dt:
+    font-weight: bold
+dd:
+    margin-left: $line_height * 1.5
+
+blockquote:
+    margin: $line_height
+    color: #666
+    font-style: italic
+
+strong:
+    font-weight: bold
+
+em:
+    font-style: italic
+    
+dfn:
+    font->
+        weight: bold
+        style: italic
+
+sup, sub:
+    line-height: 0
+
+abbr, acronym:
+    border-bottom: 1px dotted #666
+
+address:
+    margin: 0 0 $line_height
+    font-style: italic
+    
+del:
+    color:#666
+
+pre:
+    margin: $line_height 0
+    white-space: pre
+
+pre, code, tt:
+    font: 1em 'andale mono', 'lucida console', monospace
+    line-height: $line_height
+
+//.caps:
+//    font-size:.92em
+    
+//.dquo:
+//    margin-left: -.38em
+
+// Page sections
+#wrapper:
+    background: white
+    margin: 0
+    text-align: left
+    padding-bottom: $line_height * 2
+
+// Makes the bottom of the element clear everything inside it
+.clearfix:after, #wrapper:after, #header:after, .article-list li:after:
+    content: '"' + '.' + '"'
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+
+.clearfix:
+    display: block
+
+.clear:
+    clear: both
+
+#header:
+    width: $page_width
+    margin: 0 auto
+    padding: 0 0 10px 0
+    background: white
+
+
+#search:
+    padding: 66px 0 0 68px
+    margin: 0
+    float: left
+    
+    div:
+        display: inline
+        input:
+            width: 249px
+            height: 20px
+            padding: 2px 5px 0
+            float: left
+            border: 1px solid black
+            font->
+                family: Georgia, serif
+                size: 14px
+    
+        button:
+            float: left
+            width: 23px
+            height: 24px
+            text-indent: -9999px
+            border: 0
+            background: #000 url('http://media.theboar.org/static/img/search-button.2.png') no-repeat
+            // Fixes iphone
+            font-size: 1px
+
+#sections:
+    float: left
+    margin: 0
+    padding: 0
+    width: $page_width
+    font-size: 16px
+    text-align: justify
+
+    li:
+        text-align: center;
+        display: block;
+        float: left;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        a:
+            display: block
+            margin: 0
+            padding->
+                top: 6px
+                bottom: 6px
+            text-decoration: none
+            color: white
+            background-color: black
+            &:hover:
+                text-decoration: none
+
+    .active:
+        a:
+            color: white
+
+#column-wrap:
+    width: $page_width
+    margin: 0 auto
+    background: white
+
+#article-header:
+    margin-bottom: 0
+    
+    div:
+        p:
+            font-size: 12px
+            margin-bottom: 0
+            small, small a:
+                color: $small_colour
+            
+        margin-bottom: 15px
+    
+.article-metadata:
+    padding: 13px 0 5px;
+    margin: 0 0 $line_height - 1 0
+    border->
+        top: 2px solid black
+        bottom: 1px solid black
+
+    ul:
+        margin: 0
+    
+    li:
+        list-style-type: none
+        
+    .artist, .label:
+        font->
+            style: italic
+            size: 12px
+    
+    .label:
+        color: $small_colour
+    
+    .rating:
+        text-align: right
+
+.article-block-big, .article-block:
+    img:
+        margin-bottom: 14px
+
+.article-block-big > small, .article-block-big-title > small, #article-header > small:
+    position: relative
+    top: -6px
+
+.article-block-big-title:
+    margin-bottom: 0
+
+// TODO: create .column
+// so, .article and .column will create an article column
+
+
+.article-column:
+    float: left
+    width: 417px
+    padding-right: 16px
+    margin-right: 16px
+    border-right: 1px solid $line_colour
+
+.articledetails-column:
+    float: left
+    width: 166px
+
+.block-column:
+    float: left
+    width: $block_width
+
+.blockplusone-column:
+    float: left
+    width: $block_width + 1
+
+.content-column:
+    float: left
+    width: $content_width
+
+.half-column:
+    float: left
+    width: $half_width
+
+.quarter-column:
+    float: left
+    width: $quarter_width
+
+.threequarter-column:
+    float: left
+    width: $threequarter_width
+
+.teteatete-column:
+    float: left
+    width: 342px
+
+.border:
+    padding-right: $border_width / 2 - 1
+    margin-right: $border_width / 2
+    border-right: 1px solid $line_colour
+
+.block:
+    margin-bottom: $line_height
+    .link-list:
+        li:
+            border-bottom: 1px solid $line_colour
+            padding-bottom: 8px
+            margin-bottom: 11px
+            
+            small:
+                display: block
+        
+        li.last:
+            border-bottom: 0
+            padding-bottom: 9px
+
+.filter:
+    ul:
+        margin: 0
+        li:
+            list-style-type: none
+            color: $small_colour
+            a:
+                color: $small_colour
+            a.selected:
+                color: black
+                background: url('http://media.theboar.org/static/img/filter-arrow.png') no-repeat center left
+                padding-left: 10px
+
+.article-list, .link-list:
+    margin: 0
+    
+    li:
+        list-style-type: none
+
+.link-list:
+    li:
+        margin-bottom: 18px
+
+.article-list, .article-block, .article-block-title:
+    li:
+        border-bottom: 1px solid $line_colour
+        padding-bottom: 2px
+        margin-bottom: 17px
+        
+    & > small:
+        display: block
+        position: relative
+        top: -1px
+    
+    h3:
+        margin-bottom: 0
+    
+    li.last:
+        border-bottom: 0
+        margin-bottom: 0
+        padding-bottom: 0
+
+.quote:
+    color: #000
+    font-size: 18px
+    font-style: normal
+    padding: $line_height 0 $line_height 0
+    margin: $line_height - 1 0 $line_height - 1 0
+    border->
+        top: 1px solid black
+        bottom: 1px solid black
+
+.number:
+    font-size: 54px
+    line-height: $line_height * 3
+    margin-bottom: $line_height
+    display: block
+
+#footer-wrapper:
+    background: url('http://media.theboar.org/static/img/footer-fade.4.png') no-repeat top center
+
+#footer:
+    width: $page_width
+    margin: 0 auto
+    padding: $line_height * 1.5 0 $line_height * 4
+    color: #DDD
+    text-align: left
+    text-shadow: #222 0 1px 1px
+    
+    a:
+        color: #DDD
+        text-decoration: none
+        &:hover:
+            text-decoration: underline
+            color: white
+    
+    .vcard:
+        float: left
+        width: $block_width + $border_width
+        margin-bottom: 20px
+        
+        .name:
+            font-size: $font_size + 1
+            margin-bottom: 5px
+            a:
+                color: white
+        
+        .adr:
+            margin-bottom: 18px
+        
+        .email:
+            font-style: italic
+    
+    #crest:
+        margin-top: 20px
+        text-align: center
+        width: $block_width + 50px // adding a bit extra makes it appear centre
+        float: left
+        img:
+            margin-bottom: 4px
+        p:
+            font-size: 11px
+            text-align: center
+            line-height: 16px
+    
+    ul:
+        float: right
+        margin: 0
+        text-align: right
+        padding: 25px 20px 0 0
+        li:
+            list-style-type: none
+            margin-bottom: 5px
+    
+
+#user-bar:
+    float: right
+    margin: 10px 0 0 0
+    font-size: 12px
+    height: 22px
+    width: 350px
+    text-align: right
+    li:
+        display: inline
+        list-style-type: none
+        margin-left: 4px
+        
+        img:
+            position: relative
+            top: 4px
+
+#cloud-controls:
+    width: $page_width - 100
+    margin: 0px auto
+
+#cloud:
+    font-size: 10px
+    text-align: justify
+    line-height: normal
+    margin-bottom: $line_height * 4
+    a:
+        padding: 8px
+        text-decoration: none
+        vertical-align: middle
+        white-space: nowrap
+        &:hover, &:active:
+            text-decoration: underline
+
+#loading:
+    position: absolute
+    left: 50%
+    top: 350px
+
+.pagination, .pagination-simple:
+    margin-top: $line_height
+    
+    .page, .prev, .next:
+        display: block
+        border: 1px solid #666
+        float: left
+        margin: 0 2px $line_height 0
+        padding: 0 5px
+        text-decoration: none
+    
+    .current:
+        background-color: black
+        color: white
+        border-color: black
+    
+    .disabled:
+        color: #CCC
+        border-color: #CCC
+        &:hover:
+            border-color: #CCC
+
+.pagination-simple:
+    margin-left: auto
+    margin-right: auto
+    width: 260px
+    
+    .prev:
+        float: right !important
+    
+    .prev-container, .next-container:
+        width: 120px
+    
+    .next-container:
+        float: right
+    
+    .prev-container:
+        float: left
+    
+    .next-container:
+        margin-left: 20px
+    
+    img:
+        clear: both
+
+
+#comments:
+    .new-thread:
+        display: none
+    
+    ul:
+        margin: 0
+        
+        li:
+            list-style-type: none
+            margin-left: $line_height
+            
+            div.details:
+                border-top: 1px solid $small_colour
+                margin-top: $line_height - 1
+                color: $small_colour
+            
+            div.reply:
+                position: relative
+                top: -$line_height
+                //border-bottom: 1px solid $small_colour
+                //margin-bottom: $line_height - 1
+            
+                a:
+                    float: right
+                    display: none
+            
+            .comment-form:
+                display: none
+                margin-left: $line_height
+        
+    & > ul:
+        & > li:
+            margin-left: 0
+    
+    .comment-form:
+        margin-bottom: $line_height * 2
+        
+        textarea:
+            height: 100px
+    
+.inline:
+    font-size: 12px
+    small, small a:
+        color: $small_colour
+
+.more:
+    text-align: right
+    //a:
+        //color: $small_colour
+
+.center:
+    text-align: center
+
+.photography-large .right, .photography .right, #archive .right:
+    margin-left: 0
+
+.photography-large .left:
+    margin-right: 25px
+
+.photography-large .top:
+    margin-bottom: 25px
+
+#archive .issue:
+    width: 221px
+    text-align: center
+    
+    p:
+        text-align: center
+        color: $small_colour
+        font-style: italic
+    
+    .left:
+        margin-right: 22px
+    
+    img:
+        border: 1px solid black
+
+#archive-issue .spread .pages:
+    margin-bottom: $line_height
+
+    img:
+        border-top: 1px solid black
+        border-bottom: 1px solid black
+        border-left: 1px solid black
+    
+    img.last:
+        border-right: 1px solid black
+
+.archive-block:
+    & > a:
+        display: block
+        text-align: center
+
+    img:
+        border: 1px solid black
+
+.before-shaded-box-border:
+    margin-right: $border_width / 2
+    //margin-right: $border_width / 2
+    //border-right: 1px solid $line_colour
+
+.shaded-box:
+    padding-left: $border_width / 2
+    padding-top: 20px
+
+.after-shaded-box-border:
+    padding-right: $border_width / 2
+    margin-right: $border_width / 2
+    //border-right: 1px solid $line_colour
+
+.tweets:
+    padding: 10px 0 0 0
+    margin: 0
+    
+    li:
+        padding: 0
+        margin: 0 0 20px 0
+        list-style: none
+        
+        .entry:
+            font-size: 20px
+        
+        .meta:
+            display: block
+            color: #999
+
+#awards:
+    width: 700px
+    margin: $line_height*1.5 auto
+    text-align: center
+    font-size: 1.1em
+    line-height: $line_height * 1.1
+    
+    &>img:
+        margin-bottom: $line_height * 1
+    
+    h2:
+        border: 0
+        font-size: 40px
+        
+    p:
+        text-align: center
+        margin-bottom: $line_height * 2
+    
+    form:
+        text-align: left
+        
+        h3:
+            font-size: 24px
+            margin-bottom: $line_height * 1.5
+        
+        p:
+            text-align: left
+        
+        ul:
+            margin-bottom: $line_height * 3
+            
+        li:
+            list-style: none
+            margin-bottom: $line_height
+            
+            label:
+                font-size: 20px
+            
+            input:
+                width: 15px
+                height: 15px
+                margin-right: 10px
+        
+        
+        button:
+            margin: 0 auto
+            font-size: 22px
+            width: 100px
+            height: 50px
+            background-color: #DDD
+            border-color: black
+
+
+// Section colours
+
+#s-arts:
+    width: 51px
+    a.active:
+        background: $arts_colour
+.border-arts:
+    border-color: $arts_colour
+.text-arts:
+    color: $arts_colour
+.arts:
+    h2, h3, .quote:
+        border-color: $arts_colour
+    .arrows:
+        color: $arts_colour
+
+#s-books:
+    width: 66px
+    a.active:
+        background: $books_colour
+.border-books:
+    border-color: $books_colour
+.text-books:
+    color: $books_colour
+.books:
+    h2, h3, .quote:
+        border-color: $books_colour
+    .arrows:
+        color: $books_colour
+
+#s-comment:
+    width: 92px
+    a.active:
+        background: $comment_colour
+.border-comment:
+    border-color: $comment_colour
+.text-comment:
+    color: $comment_colour
+.comment:
+    h2, h3, .quote:
+        border-color: $comment_colour
+    .arrows:
+        color: $comment_colour
+    
+    .shaded-box:
+        background: $comment_colour.brighten(45)
+
+#s-features:
+    width: 83px;
+    a.active:
+        background: $features_colour
+.border-features:
+    border-color: $features_colour
+.text-features:
+    color: $features_colour
+.features:
+    h2, h3, .quote:
+        border-color: $features_colour
+    .arrows:
+        color: $features_colour
+
+#s-film:
+    width: 55px
+    a.active:
+        background: $film_colour
+.border-film:
+    border-color: $film_colour
+.text-film:
+    color: $film_colour
+.film:
+    h2, h3, .quote:
+        border-color: $film_colour
+    .arrows:
+        color: $film_colour
+
+#s-games:
+    width: 70px
+    a.active:
+        background: $games_colour
+.border-games:
+    border-color: $games_colour
+.text-games:
+    color: $games_colour
+.games:
+    h2, h3, .quote:
+        border-color: $games_colour
+    .arrows:
+        color: $games_colour
+
+#s-lifestyle:
+    width: 83px
+    a.active:
+        background: $lifestyle_colour
+.border-lifestyle:
+    border-color: $lifestyle_colour
+.text-lifestyle:
+    color: $lifestyle_colour
+.lifestyle:
+    h2, h3, .quote:
+        border-color: $lifestyle_colour
+    .arrows:
+        color: $lifestyle_colour
+
+#s-music:
+    width: 65px
+    a.active:
+        background: $music_colour
+.border-music:
+    border-color: $music_colour
+.text-music:
+    color: $music_colour
+.music:
+    h2, h3, .quote:
+        border-color: $music_colour
+    .arrows:
+        color: $music_colour
+
+#s-money:
+    width: 70px
+    a.active:
+        background: $money_colour
+        color: black
+.border-money:
+    border-color: $money_colour
+.text-money:
+    color: $money_colour
+.money:
+    h2, h3, .quote:
+        border-color: $money_colour
+    .arrows:
+        color: $money_colour
+
+#s-news:
+    width: 63px
+    a.active:
+        background: $news_colour
+.border-news:
+    border-color: $news_colour
+.text-news:
+    color: $news_colour
+.news:
+    h2, h3, .quote:
+        border-color: $news_colour
+    .arrows:
+        color: $news_colour
+
+#s-science:
+    width: 75px
+    a.active:
+        background: $science_colour
+.border-science:
+    border-color: $science_colour
+.text-science:
+    color: $science_colour
+.science:
+    h2, h3, .quote:
+        border-color: $science_colour
+    .arrows:
+        color: $science_colour
+
+#s-sport:
+    width: 65px
+    a.active:
+        background: $sport_colour
+.border-sport:
+    border-color: $sport_colour
+.text-sport:
+    color: $sport_colour
+.sport:
+    h2, h3, .quote:
+        border-color: $sport_colour
+    .arrows:
+        color: $sport_colour
+
+#s-travel:
+    width: 67px
+    a.active:
+        background: $travel_colour
+.border-travel:
+    border-color: $travel_colour
+.text-travel:
+    color: $travel_colour
+.travel:
+    h2, h3, .quote:
+        border-color: $travel_colour
+    .arrows:
+        color: $travel_colour
+
+#s-tv:
+    width: 45px
+    a.active:
+        background: $tv_colour
+.border-tv:
+    border-color: $tv_colour
+.text-tv:
+    color: $tv_colour
+.tv:
+    h2, h3, .quote:
+        border-color: $tv_colour
+    .arrows:
+        color: $tv_colour
+
+// Forms
+label_width = 190px
+join_signin_label_width = 140px
+
+button:
+    display: block
+    background-color: #f5f5f5
+    border: 1px solid #dedede
+    border-top: 1px solid #eee
+    border-left: 1px solid #eee
+    font->
+        family: Georgia, serif
+        size: 16px
+
+form:
+    margin-bottom: $line_height
+
+textarea:
+    font->
+        family: Georgia, serif
+        size: 14px
+    line-height: $line_height
+    width: 100%
+    margin-bottom: $line_height
+    border: 1px solid black
+
+// FIXME: Bleurgh, I need tidying
+
+.join-signin, .settings, .contact, .comment-preview:
+    margin-bottom: $line_height
+    ol:
+        margin: 0
+        & > li:
+            list-style-type: none
+            margin-bottom: $line_height + 8
+            font-size: 16px
+            label:
+                display: block
+                float: left
+                padding: 6px 10px 0 0
+                width: $label_width
+                text-align: right
+            
+            input, select:
+                width: 200px
+                height: 24px
+                padding: 6px 5px 0
+                border: 1px solid black
+                font->
+                    family: Georgia, serif
+                    size: 16px
+            
+            
+            select:
+                font-size: 14px
+                margin-top: 4px
+            
+            small:
+                margin-left: $label_width + 10
+                display: block
+                font-size: 12px
+                color: $small_colour
+            
+        li.captcha:
+            margin-left: $label_width - 70
+    
+    button:
+        margin: 0 7px 27px $label_width + 10
+        padding: 6px 12px
+    
+    p, .errorlist, .notice, .success, #messages:
+        margin-left: $label_width + 10
+
+#mailing-lists:
+    ol:
+        margin: 0
+        & > li:
+            list-style-type: none
+            clear: both
+            margin-bottom: $line_height + 8
+            
+            label:
+                font-size: 18px
+                display: block
+            
+            input:
+                margin: 4px 40px 0 30px
+                float: left
+                width: 15px
+                height: 15px
+            
+            .label:
+                float: left
+                width: 615px
+    button:
+        clear: both
+        margin: 0 7px 27px 85px
+        padding: 6px 12px
+
+.join-signin, .contact:
+    ol:   
+        li:
+            label:
+                width: $join_signin_label_width
+            small:
+                margin-left: $join_signin_label_width + 10
+            
+        li.captcha:
+            margin-left: $join_signin_label_width - 70
+    button:
+        margin: $join_signin_label_width + 10
+    
+    p, .errorlist, .notice, .success, #messages:
+        margin-left: $join_signin_label_width + 10
+
+.contact, .comment-preview:
+    ol > li:
+        textarea, input:
+            width: 400px
+            padding: 6px 5px 0
+
+
+.elsewhere-list:
+    margin: 0 0 $line_height * 2 0
+    li:
+        list-style-type: none
+        form:
+            display: inline
+            button:
+                display: inline
+                margin-left: 10px
+
+fieldset:
+    padding: 19px
+    margin: 0 0 $line_height 0
+    border: 1px solid $line_colour
+
+legend:
+    font-weight: bold
+    font-size: 16px
+
+input.label:
+    color: $small_colour
+
+.errorlist, .notice, .success, #messages:
+    padding: 6px 10px
+    border: 2px solid $line_colour
+    li:
+        margin-bottom: 0
+        list-style-type: none
+
+.errorlist:
+    background: #FBE3E4
+    color: #8a1f11
+    border-color: #FBC2C4
+    a:
+        color: #8a1f11
+
+.notice:
+    background: #FFF6BF
+    color: #514721
+    border-color: #FFD324
+    a:
+        color: #514721
+
+.success, #messages:
+    background: #E6EFC2
+    color: #264409
+    border-color: #C6D880
+    a:
+        color: #264409
+
+#messages:
+    position: absolute
+    left: 50%
+    top: 40px
+    width: 260px
+    margin-left: 190px
+    display: none

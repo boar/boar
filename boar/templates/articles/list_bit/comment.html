@@ -1,0 +1,2 @@
+{% extends "articles/list_bit/default.html" %}
+{% block list-bit-headline %}{{ block.super }}{% with a.authors.all as authors %}{% if authors %} <small>{{ authors.0.get_full_name }}</small>{% endif %}{% endwith %}{% endblock %}

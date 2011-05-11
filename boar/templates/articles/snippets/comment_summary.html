@@ -1,0 +1,1 @@
+{% load markup %}{% load urlify_markdown %}{% load typogrify %}{{ o.comment|truncatewords:"20"|urlify_markdown|remove_linebreaks|markdown:"safe"|typogrify|remove_p }}

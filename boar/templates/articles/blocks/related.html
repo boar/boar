@@ -1,0 +1,6 @@
+{% load typogrify %}{% load articles %}{% load humanize %}{% with article|related_to:"4" as related %}{% if related %}<div class="block">
+    <h3>Related</h3>
+    <ul class="link-list">{% for a in related %}
+        <li{% if forloop.last %} class="last"{% endif %}><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a> <small class="alt">{{ a.pub_date|naturalday }}</small></li>{% endfor %}
+    </ul>
+</div>{% endif %}{% endwith %}

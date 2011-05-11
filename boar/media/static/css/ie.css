@@ -1,0 +1,11 @@
+.clearfix, #wrapper, #header, .article-list li {display: inline-block;}
+* html .clearfix,
+* html #wrapper,
+* html #header,
+* html .article-list li {height: 1%;}
+#header h1 {margin-bottom: 5px;}
+.article-column, .articledetails-column, .block-column, .blockplusone-column, .content-column, .half-column, .quarter-column, .threequarter-column {
+    display: inline;
+    overflow-x: hidden;
+}
+img {-ms-interpolation-mode:bicubic;}

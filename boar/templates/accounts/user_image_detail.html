@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load articles %}
+{% load markup %}
+{% load pagination_tags %}
+{% load thumbnail %}
+{% load typogrify %}
+{% block title %}{{ image.title }} &mdash; {{ user.get_full_name }} &mdash; {{ block.super }}{% endblock %}
+{% block content %}<h2><a href="{% url user_detail user.username %}">{{ user.get_full_name }}</a>: <a href="{% url user_image_list user.username %}">Photography</a>: {{ image.title|typogrify }}</h2>
+<div class="content-column border">
+    <img src="{% thumbnail image.upload 616x9999999 %}" alt="{{ image.title }}" width="616" class="top" />
+    <div class="pagination-simple">
+        {% with image.get_previous_for_author as previous %}{% with image.get_next_for_author as next %}
+        {% if previous %}<div class="prev-container">
+            <a class="page prev" href="{% url user_image_detail user.username previous.id %}">&laquo; previous</a>
+            <a href="{% url user_image_detail user.username previous.id %}"><img src="{% thumbnail previous.upload 120x120 crop="smart" %}" alt="previous" width="120" height="120" /></a>
+        </div>{% endif %}
+        {% if next %}<div class="next-container">
+            <a class="page next" href="{% url user_image_detail user.username next.id %}">next &raquo;</a>
+            <a href="{% url user_image_detail user.username next.id %}"><img src="{% thumbnail next.upload 120x120 crop="smart" %}" alt="next" width="120" height="120" /></a>
+        </div>{% endif %}
+        {% endwith %}{% endwith %}
+    </div>
+</div>
+<div class="block-column">
+    <h3>Published</h3>
+    {% with image.article_set.all as articles %}{% if articles %}<ul>{% for a in articles %}
+        <li><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a></li>{% endfor %}
+    </ul>{% else %}<p class="donthyphenate">This photograph hasn&rsquo;t been published anywhere.</p>{% endif %}{% endwith %}
+</div>
+{% endblock %}

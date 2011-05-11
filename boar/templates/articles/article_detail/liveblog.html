@@ -1,0 +1,53 @@
+{% extends "articles/article_detail/article.html" %}
+{% load articles %}
+{% load inlines %}
+{% load markup %}
+{% load typogrify %}
+{% block extra_js %}{{ block.super }}
+<script type="text/javascript" src="{{ MEDIA_URL}}static/js/twitterlib.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL}}static/js/jquery.timeago.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var since_id = {{ article.liveblog_metadata.since_tweet_id|default:"1" }};
+        var initial = true;
+        
+        (function run() {
+            twitterlib.timeline('{{ article.liveblog_metadata.twitter_username|escapejs }}', {since: since_id}, function(data) {
+                if (data.length) {
+                    $('#live-blog-feed .loading').remove();
+                    data = data.reverse();
+                    var delay = 500;
+                    if (initial) {
+                        delay = 0;
+                        initial = false;
+                    }
+                    for (var i=0; i<data.length; i++) {
+                        var tweet = $('<li><span class="entry">'+twitterlib.ify.clean(data[i].text)+'</span> <span class="meta timeago" title="'+data[i].created_at+'">'+twitterlib.time.datetime(data[i].created_at)+'</span></li>');
+                        var tweetClone = tweet.clone().hide()
+                        tweetClone.find('.timeago').timeago();
+                        tweetClone.css({ visibility: 'hidden' }).prependTo('#live-blog-feed').slideDown(delay);
+                        tweet.css({ top: -200, position: 'absolute' }).prependTo('#live-blog-feed').animate({
+                            top: 0
+                        }, delay, function () {
+                            tweetClone.css({ visibility: 'visible' });
+                            $(this).remove();
+                        });
+                        
+                        since_id = data[i].id;
+                    }
+                }
+            });
+          setTimeout(run, 30000);
+        })();
+    });
+</script>
+{% endblock %}
+{% block content %}<h2><a href="{{ article.section.get_absolute_url }}">{{ article.section.title }}</a>: {{ article.title|typogrify }}</h2>
+<div class="half-column border">
+    <h3><a href="http://twitter.com/{{ article.liveblog_metadata.twitter_username }}">Live blog</a> <small style="float: right">updates automatically</small></h3>
+    <ul id="live-blog-feed" class="tweets"><li class="loading"><span class="entry">Loading...</span></li></ul>
+</div>
+<div class="half-column">
+    {% process_inlines article.body as body %}{{ body|markdown|typogrify }}
+</div>
+{% endblock %}

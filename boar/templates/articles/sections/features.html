@@ -1,0 +1,42 @@
+{% extends "articles/sections/default.html" %}
+{% load articles %}
+{% load markup %}
+{% load typogrify %}
+{% load uploads %}
+{% block section-featured %}{% ifequal page_obj.number 1 %}{% if featured.0 and featured.1 %}
+<div class="clearfix block">
+    {% for a in featured|slice:"0:2" %}<div class="article-block-big-title half-column{% if not forloop.last %} border{% endif %}">
+        <h2><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a></h2>
+        <small>{% include "articles/snippets/date.html" %}</small>
+    </div>
+    {% endfor %}
+
+    {% for a in featured|slice:"0:2" %}<div class="article-block-big half-column{% if not forloop.last %} border{% endif %}">
+        {% if a.image %}<a href="{{ a.get_absolute_url }}"><img src="{% upload_thumbnail a.image "half" %}" alt="{{ a.image }}" /></a>{% endif %}
+        {{ a.get_summary|markdown|typogrify }}
+    </div>
+    {% endfor %}
+</div>
+{% if featured.2 and featured.3 and featured.4 %}
+<div class="clearfix">
+    {% for a in featured|slice:"2:5" %}<div class="block-column article-block-title{% if not forloop.last %} border{% endif %}">
+        <h3><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a></h3>
+        <small>{% include "articles/snippets/date.html" %}</small>
+    </div>
+    {% endfor %}
+    {% for a in featured|slice:"2:5" %}<div class="block-column article-block{% if not forloop.last %} border{% endif %}">
+        {% if a.image %}<a href="{{ a.get_absolute_url }}"><img src="{% upload_thumbnail a.image "block" %}" alt="{{ a.image }}" /></a>{% endif %}
+        {{ a.get_summary|markdown|typogrify }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}{% endif %}{% endifequal %}
+{% endblock %}
+{% block section-column2 %}<div class="quarter-column border">
+    {% archive_block all_articles date section.get_absolute_url %}
+    {% with 1 as no_image %}{% for topic in topics|slice:":1" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}
+{% block section-column3 %}<div class="quarter-column">
+    {% include "articles/blocks/topics.html" %}
+    {% with 1 as no_image %}{% for topic in topics|slice:"1:2" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}

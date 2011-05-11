@@ -1,0 +1,1 @@
+{% if stars %}<li class="rating" title="{{ score }}">{% for star in stars %}<img src="{{ MEDIA_URL }}static/img/star-{% if star %}filled{% else %}empty{% endif %}.2.png" alt="" />{% endfor %}</li>{% endif %}

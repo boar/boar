@@ -1,0 +1,1 @@
+{% for topic in cloud %}<a style="font-size: {{ topic.font_size }}em" href="/{{ section.slug }}/{{ topic.slug }}/{{ date.year }}/{{ date|date:"b" }}/">{{ topic.name }}</a> {% endfor %}

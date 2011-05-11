@@ -1,0 +1,20 @@
+{% extends "flatpages/default.html" %}
+{% load articles %}
+{% load markup %}
+{% load typogrify %}
+{% block flatpage_content %}{{ flatpage.content|markdown|typogrify }}
+
+    
+<h3 class="clearfix">Staff</h3>
+<div class="block-column border">    
+    {% get_positions %}{% for p in positions %}{% with p.members.all|order_by:"last_name" as members %}<h4>{{ p }}{% if p.email %} <small><a href="mailto:{{ p.email }}">{{ p.email }}</a></small>{% endif %}</h4>
+{% if members %}<ul>
+    {% for e in members %}<li><a href="{{ e.get_absolute_url }}">{{ e.get_full_name }}</a></li>{% endfor %}</ul>{% else %}<p><em>Position vacant</em></p>{% endif %}{% endwith %}{% endfor %}
+</div>
+{% get_about_sections %}{% for section_group in sections %}<div class="block-column{% if not forloop.last %} border{% endif %}">
+    
+    {% for s in section_group %}<h4>{{ s }}{% if s.email %} <small><a href="mailto:{{ s.email }}">{{ s.email }}</a></small>{% endif %}</h4>
+{% with s.editors.all|order_by:"last_name" as editors %}{% if editors %}<ul>
+    {% for e in editors %}<li><a href="{{ e.get_absolute_url }}">{{ e.get_full_name }}</a></li>{% endfor %}
+</ul>{% else %}<p><em>Position vacant</em></p>{% endif %}{% endwith %}{% endfor %}
+</div>{% endfor %}{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "articles/article_detail/article.html" %}
+{% block extra_js %}{{ block.super }}
+{% if article.podcast_metadata %}<script type="text/javascript" src="{{ MEDIA_URL }}static/js/audio-player.js"></script>  
+<script type="text/javascript">  
+    AudioPlayer.setup("{{ MEDIA_URL }}static/flash/player.swf", {  
+        width: 417,
+        animation: "no"
+    });  
+    AudioPlayer.embed("podcast-player", {
+        titles: "{{ article.title|escapejs }}",
+        soundFile: "{{ article.podcast_metadata.podcast.url }}"
+    });  
+</script>{% endif %}{% endblock %}
+{% block article-body %}
+{% if article.podcast_metadata %}<p><p id="podcast-player">You need Flash to listen to podcasts</p></p>{% endif %}
+{{ block.super }}
+{% endblock %}

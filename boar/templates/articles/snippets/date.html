@@ -1,0 +1,1 @@
+{% load comments %}{{ a.pub_date|date:"l j F, Y" }}{% get_comment_count for a as comment_count %}{% if comment_count %} - {{ comment_count }} comment{{ comment_count|pluralize }}{% endif %}

@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | The Boar admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">The Boar administration</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block footer %}{{ block.super }}
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+        appId: '{{ FACEBOOK_API_KEY|escapejs }}',
+        status: true,
+        cookie: true,
+        xfbml: true
+    });
+    FB.Event.subscribe('auth.sessionChange', function(response) {
+        window.location = window.location;
+    });
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
+{% endblock %}

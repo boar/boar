@@ -1,0 +1,27 @@
+{% extends "articles/sections/default.html" %}
+{% load articles %}
+{% load comments %}
+{% load smart_if %}
+{% load typogrify %}
+{% block section-featured %}
+{% if page_obj.number == 1 and featured.0 %}
+<div class="content-column border">
+<ul class="article-list">
+{% for a in featured %}{% with 1 as always_left %}{% article_list_bit a %}{% endwith %}{% endfor %}
+</ul></div>
+<div class="blockplusone-column">
+    {% include "articles/blocks/topics.html" %}
+</div>{% endif %}
+{% endblock %}
+{% comment %}{% block section-column3 %}<div class="quarter-column">
+    {% if page_obj.number != 1 or not featured.0 %}
+    {% include "articles/blocks/topics.html" %}
+    {% endif %}
+    {% with articles|most_commented as most_commented %}{% if most_commented %}<div class="block">
+        <h3>Debate</h3>
+        {% with 1 as no_image %}<ul class="article-list">{% for a in most_commented|slice:":5" %}
+            {% article_list_bit a %}{% endfor %}
+        </ul>{% endwith %}
+    </div>{% endif %}{% endwith %}
+    {% with 1 as no_image %}{% for topic in topics|slice:"3:6" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}{% endcomment %}

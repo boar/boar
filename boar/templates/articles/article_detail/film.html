@@ -1,0 +1,12 @@
+{% extends "articles/article_detail/article.html" %}
+{% load articles %}
+{% load humanize %}
+{% load thumbnail %}
+{% block articledetails %}
+    {% comment %}{% if article.musicalbum_metadata.album_art %}<img src="{% thumbnail article.musicalbum_metadata.album_art 166x160 crop %}" alt="{{ article }}" />{% endif %}{% endcomment %}
+    <ul class="article-metadata border-{{ section.slug }} hreview">
+        <li class="item fn">{{ article }}</li>
+        <li class="artist">{% for topic in topics %}{% if not forloop.first %}, {% endif %}<a href="/{{ section.slug }}/{{ topic.slug }}/" rel="tag" class="">{{ topic.name }}</a>{% endfor %}</li>
+        {% article_stars article.score %}
+    </ul>
+    {% include "articles/blocks/related.html" %}{% endblock %}

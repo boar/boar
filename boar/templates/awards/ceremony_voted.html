@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load awards %}
+{% load markup %}
+{% load typogrify %}
+{% block title %}{{ ceremony.title }} &mdash; {{ block.super }}{% endblock %}
+{% block content %}
+<div id="awards">
+    <img src="{{ MEDIA_URL }}static/img/boris-crest-big-black.png" alt="" />
+    <p id="awards-description" class="donthyphenate">You&rsquo;re awesome. Thanks for voting. Be sure to join us at the <a href="http://www.facebook.com/event.php?eid=127538767283925">awards ceremony</a>!</p>
+
+</div>
+{% endblock %}

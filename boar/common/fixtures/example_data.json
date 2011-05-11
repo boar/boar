@@ -1,0 +1,279 @@
+[
+    {
+        "pk": 1, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "News", 
+            "colour": "#B81B15", 
+            "editors": [
+                
+            ], 
+            "slug": "news", 
+            "email": "news@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 1
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Comment", 
+            "colour": "#FFAA00", 
+            "editors": [
+                
+            ], 
+            "slug": "comment", 
+            "email": "comment@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 3
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Features", 
+            "colour": "#45BB2C", 
+            "editors": [
+                
+            ], 
+            "slug": "features", 
+            "email": "features@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 4
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Money", 
+            "colour": "#FFF500", 
+            "editors": [
+            ], 
+            "slug": "money", 
+            "email": "money@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 5
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Music", 
+            "colour": "#FF6600", 
+            "editors": [
+            ], 
+            "slug": "music", 
+            "email": "music@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 7
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Games", 
+            "colour": "#008078", 
+            "editors": [
+            ], 
+            "slug": "games", 
+            "email": "games@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 8
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "TV", 
+            "colour": "#891C88", 
+            "editors": [
+            ], 
+            "slug": "tv", 
+            "email": "tv@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 9
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Film", 
+            "colour": "#7C1A26", 
+            "editors": [
+            ], 
+            "slug": "film", 
+            "email": "film@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 10
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Books", 
+            "colour": "#0092D7", 
+            "editors": [], 
+            "slug": "books", 
+            "email": "books@theboar.org", 
+            "tag_name": "Authors", 
+            "order": 11
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Arts", 
+            "colour": "#FF6617", 
+            "editors": [
+            ], 
+            "slug": "arts", 
+            "email": "arts@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 12
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Lifestyle", 
+            "colour": "#261879", 
+            "editors": [
+            ], 
+            "slug": "lifestyle", 
+            "email": "lifestyle@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 13
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Travel", 
+            "colour": "#1C1248", 
+            "editors": [
+            ], 
+            "slug": "travel", 
+            "email": "travel@theboar.org", 
+            "tag_name": "Topics", 
+            "order": 14
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "articles.section", 
+        "fields": {
+            "menu_item": true, 
+            "title": "Sport", 
+            "colour": "#008A37", 
+            "editors": [
+            ], 
+            "slug": "sport", 
+            "email": "sport@theboar.org", 
+            "tag_name": "Sports", 
+            "order": 20
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "uploads.thumbnailsize", 
+        "fields": {
+            "width": 620, 
+            "name": "main", 
+            "height": 260
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "uploads.thumbnailsize", 
+        "fields": {
+            "width": 283, 
+            "name": "block", 
+            "height": 140
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "uploads.thumbnailsize", 
+        "fields": {
+            "width": 200, 
+            "name": "article-list", 
+            "height": 100
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "uploads.thumbnailsize", 
+        "fields": {
+            "width": 450, 
+            "name": "half", 
+            "height": 200
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "mailing_lists.mailinglist", 
+        "fields": {
+            "is_visible": true, 
+            "description": "Find out what's coming up in the next <em>Boar</em>, how to get involved and be the first to hear about competitions.", 
+            "default_for_new_users": true, 
+            "from_email": "editor@theboar.org", 
+            "subscribers": [
+            ], 
+            "template": "So um.", 
+            "order": 0, 
+            "name": "Weekly newsletter"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "mailing_lists.mailinglist", 
+        "fields": {
+            "is_visible": true, 
+            "description": "Have you got a nose for news? Can you sniff out a story?", 
+            "default_for_new_users": false, 
+            "from_email": "news@theboar.org", 
+            "subscribers": [], 
+            "template": "", 
+            "order": 1, 
+            "name": "News"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "mailing_lists.mailinglist", 
+        "fields": {
+            "is_visible": true, 
+            "description": "", 
+            "default_for_new_users": false, 
+            "from_email": "comment@theboar.org", 
+            "subscribers": [
+            ], 
+            "template": "", 
+            "order": 2, 
+            "name": "Comment"
+        }
+    }
+]

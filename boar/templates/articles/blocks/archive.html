@@ -1,0 +1,8 @@
+<div class="block">
+    <h3>Archive</h3>
+    {% if date %}<p>Currently viewing {{ date|date:"F Y" }}, <a href="{{ absolute_url }}">see all</a>.</p>{% endif %}
+    <form method="get" action="{{ absolute_url }}">
+    <div>{{ form.month }}
+    <input type="submit" value="Go" /></div>
+    </form>
+</div>

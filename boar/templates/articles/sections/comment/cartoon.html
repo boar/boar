@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load articles %}
+{% load markup %}
+{% load thumbnail %}
+{% load typogrify %}
+{% block title %}{{ cartoon.date|date:"j/n/Y" }} &mdash; Cartoon &mdash; Comment &mdash; {{ block.super }}{% endblock %}
+{% block content %}<h2><a href="/comment/">Comment</a>: Cartoon: {{ cartoon.date|date:"j/n/Y" }}</h2>
+<div class="content-column border">
+    <img src="{% thumbnail cartoon.cartoon 616x10000 %}" alt="Cartoon for {{ cartoon.date|date:"j/n/Y" }}" class="left top" />
+    
+    {% spaceless %}
+    {% with cartoon.get_previous_by_date as previous %}{% with cartoon.get_next_by_date as next %}
+    {% if next or previous %}<div class="pagination-simple clearfix">
+        {% if previous %}<div class="prev-container"><a href="{{ previous.get_absolute_url }}" class="page prev">&laquo; previous</a></div>{% endif %}
+        {% if next %}<div class="next-container"><a href="{{ next.get_absolute_url }}" class="page next">next &raquo;</a></div>{% endif %}
+        </div>{% endif %}
+        {% endwith %}{% endwith %}{% endspaceless %}
+    {% if cartoon.description %}{{ cartoon.description|markdown|typogrify }}{% endif %}
+    {% if cartoon.author %}<p><small>By <a href="{{ cartoon.author.get_absolute_url }}">{{ cartoon.author.get_full_name }}</a></small></p>{% endif %}
+</div>
+<div class="block-column">
+    {% section_block "comment" "2" %}
+</div>
+{% endblock %}

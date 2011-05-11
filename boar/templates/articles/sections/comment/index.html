@@ -1,0 +1,21 @@
+{% extends "articles/sections/default.html" %}
+{% load articles %}
+{% load comments %}
+{% load smart_if %}
+{% load thumbnail %}
+{% load typogrify %}
+{% block section-featured %}
+{% if page_obj.number == 1 and featured.0 %}
+{% if cartoon %}<div class="half-column border">{% endif %}
+<ul class="article-list">
+{% for a in featured %}{% with 1 as always_left %}{% article_list_bit a %}{% endwith %}{% endfor %}
+</ul>{% if cartoon %}</div>
+<div class="half-column">
+    <a href="{{ cartoon.get_absolute_url }}"><img src="{% thumbnail cartoon.cartoon 450x10000 %}" alt="Cartoon for {{ cartoon.date|date:"j/n/Y" }}" class="left top" /></a>
+    <div class="more"><a href="{{ cartoon.get_absolute_url }}">More cartoons...</a></div>
+</div>{% endif %}{% endif %}
+{% endblock %}
+{% block section-column3 %}<div class="quarter-column">
+    {% include "articles/blocks/topics.html" %}
+    {% with 1 as no_image %}{% for topic in topics|slice:"3:6" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}

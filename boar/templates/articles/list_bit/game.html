@@ -1,0 +1,2 @@
+{% extends "articles/list_bit/default.html" %}
+{% block list-bit-headline %}{{ block.super }}{% if a.game_metadata.platform %} <small>{{ a.game_metadata.platform }}</small>{% endif %}{% endblock %}

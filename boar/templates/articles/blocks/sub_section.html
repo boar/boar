@@ -1,0 +1,6 @@
+{% load articles %}{% if sub_section.articles %}<div class="block">
+    <h3><a href="/{{ section.slug }}/{{ sub_section.slug }}/{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">{{ sub_section.name }}</a></h3>
+    <ul class="article-list">{% for a in sub_section.articles|slice:":2" %}
+        {% article_list_bit a %}{% endfor %}
+    </ul>
+</div>{% endif %}

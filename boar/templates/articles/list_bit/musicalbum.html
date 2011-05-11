@@ -1,0 +1,6 @@
+{% load articles %}{% load markup %}{% load typogrify %}<li{% if forloop.last %} class="last"{% endif %}>
+    <h3><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a>{% if a.musicalbum_metadata.artist %} <small>{{ a.musicalbum_metadata.artist }}</small>{% endif %}</h3>
+    <small>{% include "articles/snippets/date.html" %}</small>
+    {% if a.musicalbum_metadata.album_art %}{% if not no_image or in_block %}{% load thumbnail %}<a href="{{ a.get_absolute_url }}"><img src="{% thumbnail a.musicalbum_metadata.album_art 100x100 crop %}" alt="{{ a }}" class="right top" width="100" height="100" /></a>{% endif %}{% endif %}
+    {% filter markdown|typogrify %}<span{% if a.musicalbum_metadata.album_art %} class="article-list-image-right"{% endif %}>{% if not section %}<a href="{{ a.section.get_absolute_url}}">{{ a.section }}:</a> {% endif %}{% block list-bit-summary %}{{ a.get_summary }}{% endblock %}</span>{% endfilter %}
+</li>

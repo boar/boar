@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+ 
+{% block title %}Preview your comment &mdash; {{ block.super }}{% endblock %}
+ 
+{% block content %}
+  {% load comments %}
+  <h2>Comment</h2>
+  <form action="{% comment_form_target %}" method="post" class="comment-preview">
+    {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+    {% if not form.errors %}
+      <blockquote>{{ comment|linebreaks }}</blockquote>
+      <p>
+      <input type="submit" name="submit" class="submit-post" value="Post your comment" id="submit" /> or make changes:
+      </p>
+    {% endif %}
+    <ol><li>{% if form.comment.errors %}{{ form.comment.errors }}{% endif %}<label>Comment</label> {{ form.comment }}</li></ol>
+    {{ form.content_type }}{{ form.object_pk }}{{ form.parent }}{{ form.security_hash }}{{ form.timestamp }}
+    <button type="submit" name="submit">Post</button>
+    <button type="submit" name="preview">Preview</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,95 @@
+
+body {
+  line-height: 1.5;
+  font-family: Georgia, serif;   
+  color:#000;
+  background: none;
+  font-size: 10pt;
+}
+
+
+/* Layout
+-------------------------------------------------------------- */
+
+hr { 
+  background:#ccc; 
+  color:#ccc;
+  width:100%;
+  height:2px;
+  margin:2em 0;
+  padding:0;
+  border:none;
+}
+hr.space {
+  background: #fff;
+  color: #fff;
+}
+
+
+/* Text
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+}
+
+#article-header h2 {
+    font-size: 32px;
+    line-height: 40px;
+    margin: 0;
+}
+
+code { font:.9em "Courier New", Monaco, Courier, monospace; } 
+
+img.left, img.right { float:left; margin:1.5em 1.5em 1.5em 0; }
+a img { border:none; }
+img.top { margin-top: 0; }
+
+blockquote {
+  margin:1.5em;
+  padding:1em;
+  font-style:italic;
+  font-size:.9em;
+}
+
+small, small a {
+    color: #999;
+}
+
+
+/* Links
+-------------------------------------------------------------- */
+
+a:link, a:visited {
+  color: black;
+  text-decoration: underline;
+}
+
+#user-bar, #search, #sections, .comment_form, #comments div.reply, #footer {
+    display: none;
+}
+
+#comments {
+    margin-bottom: 40px;
+}
+
+#comments ul {
+    margin: 0;
+    padding: 0;
+}
+
+#comments li {
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+#comments > ul > li {
+    margin-left: 0;
+}
+
+#comments div.details {
+    border-top: 1px solid #999;
+    margin-top: 19px;
+    color: #999
+}

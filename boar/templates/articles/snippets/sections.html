@@ -1,0 +1,1 @@
+{% load cache %}{% cache 7200 sections section %}<ul id="sections">{% for s in sections %}<li id="s-{{ s.slug }}"><a href="{{ s.get_absolute_url }}"{% if s.active %} class="active"{% endif %}>{{ s.title }}</a></li>{% endfor %}</ul>{% endcache %}

@@ -1,0 +1,33 @@
+# Libraries
+python-dateutil<2.0
+BeautifulSoup
+-e git://github.com/tymofij/clevercss.git@19673ad#egg=clevercss
+Django==1.1.1
+feedparser==4.1
+Graphication==0.1.0
+Markdown==2.0.3
+multiprocessing==2.6.2.1
+-f http://python-twitter.googlecode.com/files/python-twitter-0.6.tar.gz
+-e git://github.com/facebook/python-sdk@2da0f678f0#egg=facebook-python-sdk
+python-twitter==0.6
+simplejson
+-f http://typogrify.googlecode.com/files/typogrify-1.0.tar.gz
+typogrify==1.0
+
+# Django pluggables
+celery==1.0.1
+-e git://github.com/bfirsh/django-reversion.git@d566115da40611266f86#egg=django-reversion
+pysolr==2.0.9
+smartypants==1.6.0.3
+sorl-thumbnail==3.2.5
+South==0.7
+-e git://github.com/mintchaos/django_compressor.git@8f57651#egg=django_compressor
+-e git://github.com/bfirsh/django-ordered-model.git@1814f6fee0#egg=django-ordered-model
+-e git://github.com/robhudson/django-debug-toolbar.git@d05dcbb4aa93b1#egg=django-debug-toolbar
+-e git://github.com/toastdriven/django-haystack.git@41814ab4#egg=django-haystack
+-e git://github.com/mintchaos/django_inlines.git@cb22e00d#egg=django_inlines
+-e git://github.com/ericflo/django-pagination.git@1c414c8#egg=django-pagination
+-e git://github.com/bfirsh/django-shorturls.git@92ac4824#egg=django-shorturls
+-e git://github.com/bfirsh/syndication-view.git@29beb3ba5#egg=syndication-view
+-e git://github.com/bfirsh/django-tagging.git@6c2bbc05e#egg=django-tagging
+-e git://github.com/HonzaKral/django-threadedcomments.git@3df699ced#egg=django-threadedcomments

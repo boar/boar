@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load articles %}
+{% load markup %}
+{% load shorturl %}
+{% load smart_if %}
+{% load thumbnail %}
+{% load typogrify %}
+{% block title %}{{ object.get_full_name }} &mdash; {{ block.super }}{% endblock %}
+{% block extra_head %}{{ block.super }}<link rel="alternate" type="application/atom+xml" title="The Boar: {{ object.get_full_name }}" href="{% url articles_feed_user object.username %}" />
+<link rev="canonical" href="http://{{ request.get_host }}{% shorturl object %}" />{% endblock %}
+{% block content %}<h2>{{ object.get_full_name }}{% with object.get_profile.get_position_description as position %}{% if position %} <small>{{ position }}</small>{% endif %}{% endwith %}</h2>
+<div class="half-column border">
+    {% if object.get_profile.photo or object.get_profile.about %}<div class="block clearfix">
+        {% if object.get_profile.photo %}<img src="{% thumbnail object.get_profile.photo 200x200 crop %}" alt="{{ object.get_full_name }}" class="left top" width="200" height="200" />{% endif %}
+        {% if object.get_profile.about %}{{ object.get_profile.about|markdown|typogrify }}{% endif %}
+        {% comment %}
+            {% with object.website_profiles.all as website_profiles %}{% with object.social_network_profiles.all as social_network_profiles %}{% if social_network_profiles or website_profiles or object.is_staff %}<p>{% if object.is_staff and object.email %}<a href="{% url contact_user object.username %}"><img src="{{ MEDIA_URL }}static/images/envelope.gif" alt="Contact" title="Contact" /></a> {% endif %}{% for profile in website_profiles %}<a href="{{ profile.url }}" rel="me"><img src="{{ profile.icon }}" alt="{{ profile.name }}" /></a> {% endfor %}{% for profile in social_network_profiles %}<a href="{{ profile.url }}" rel="me"><img src="{{ profile.icon }}" alt="{{ profile.name }}" /></a> {% endfor %}</p>{% endif %}{% endwith %}{% endwith %}
+        {% endcomment %}
+    </div>{% endif %}
+    {% comment %}{% if object.get_profile.articles_graph %}<div class="block">
+        <h3>Writing</h3>
+        <img src="{{ MEDIA_URL }}static/{{ object.get_profile.articles_graph }}" alt="A graph of {{ object.first_name }}'s writing history" />
+    </div>
+    {% endif %}{% endcomment %}
+    <h3>Comments</h3>
+    {% with object.comment_comments.all|order_by:"-submit_date" as comments %}{% if comments %}<ul class="link-list">
+      {% for o in comments %}{% if o.content_object.published %}<li><a href="{{ o.get_absolute_url }}">{{ o.content_object.title|typogrify }}</a> <small>{{ o.submit_date|date:"l j F, Y" }}</small>
+            <p>{% include "articles/snippets/comment_summary.html" %}</p></li>
+        {% endif %}{% endfor %}</ul>{% else %}<p>{{ object.first_name }} hasn&rsquo;t commented on anything.</p>{% endif %}{% endwith %}
+</div>
+<div class="half-column">
+    {% with object.article_set.published as articles %}{% with object.image_set.published as images %}
+    {% if articles or not images %}<h3><a href="{% url user_writing object.username %}">Writing</a></h3>
+    {% if articles %}<ul class="article-list">{% for a in articles|slice:":4" %}{% article_list_bit a %}{% endfor %}</ul><div class="more"><a href="{% url user_writing object.username %}">More writing...</a></div>{% else %}<p>{{ object.first_name }} hasn&rsquo;t written anything.</p>{% endif %}{% endif %}
+    
+    {% if images %}<h3><a href="{% url user_image_list object.username %}">Photography</a></h3>
+    <div class="photography">
+    {% if images %}{% for image in images|slice:":6" %}<a href="{% url user_image_detail object.username image.id %}"><img src="{% thumbnail image.upload 215x200 crop="smart" %}" alt="{{ image.title }}" class="{% cycle 'left' 'right' %} top" width="215" height="200" /></a> {% endfor %}{% endif %}
+    <div class="more"><a href="{% url user_image_list object.username %}">More photography...</a></div></div>{% endif %}
+    
+{% endwith %}{% endwith %}
+</div>
+{% endblock %}

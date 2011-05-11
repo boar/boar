@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}You need to connect to Facebook to view this page - {{ block.super }}{% endblock %}
+{% block extra_js %}{{ block.super }}<script type="text/javascript">
+    boar.refreshOnSessionChange = true;
+</script>{% endblock %}
+{% block content %}
+<h2>You need to connect to Facebook to view this page</h2>
+<p>Please use the button in the top right hand corner of the page.</p>
+{% endblock %}

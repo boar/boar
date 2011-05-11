@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load awards %}
+{% load markup %}
+{% load typogrify %}
+{% block title %}{{ ceremony.title }} &mdash; {{ block.super }}{% endblock %}
+{% block content %}
+<div id="awards">
+    <img src="{{ MEDIA_URL }}static/img/boris-crest-big-black.png" alt="" />
+    <h2>{{ ceremony.title|typogrify }}</h2>
+    <p id="awards-description" class="donthyphenate">Too late – voting closed {{ ceremony.end_date|timesince }} ago. Sorry!</p>
+
+</div>
+{% endblock %}

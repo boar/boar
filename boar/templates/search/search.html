@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Search{% if form.cleaned_data.q %} for "{{ form.cleaned_data.q }}"{% endif %} &mdash; {{ block.super }}{% endblock %}
+{% load articles %}
+{% load get_vars %}
+{% load pagination_tags %}
+{% load typogrify %}
+{% block content %}{% with articles.qs as qs %}{% if form.is_valid %}
+<div class="threequarter-column border">
+    <h2 class="border-{{ section.slug }}">Search{% if form.cleaned_data.q %} for &#8220;{{ form.cleaned_data.q }}&#8221; <small>{{ results.count }} result{{ results.count|pluralize }}</small>{% endif %}</h2>
+    <div class="half-column border">
+        {% if results %}{% autopaginate results 25 as paginated_results %}<ul class="article-list">
+            {% for result in paginated_results %}{% with result.object as a %}{% article_list_bit a %}{% endwith %}{% endfor %}
+        </ul>
+        {% paginate %}
+        {% else %}<p>No results found.</p>{% endif %}
+    </div>
+
+    <div class="quarter-column">
+        {% if facets.fields.pub_date %}{% if facets.selected.pub_date %}
+        <h3>{{ facets.selected.pub_date }}</h3>
+        <div><a href="?{% remove_get_var request "facet_pub_date" %}">&laquo; all dates</a></div>
+        {% else %}
+        <h3>Date</h3>
+        <ul>{% for v in facets.fields.pub_date %}
+            <li><a href="?{% add_get_var request "facet_pub_date" v.key %}">{{ v.name }}</a> ({{ v.count }})</li>{% endfor %}</ul>
+        {% endif %}{% endif %}
+        
+        {% if facets.fields.section %}{% if facets.selected.section %}
+            {% if facets.selected.tag %}
+            <h3>{{ facets.selected.tag }}</h3>
+            <div><a href="?{% remove_get_var request "facet_tag" %}">&laquo; all tags in {{ facets.selected.section }}</a></div>
+            {% else %}
+            <h3>{{ facets.selected.section }}</h3>
+            <ul>{% for v in facets.fields.tag|slice:"10" %}{% ifnotequal v.count 0 %}
+                <li><a href="?{% add_get_var request "facet_tag" v.key %}">{{ v.name }}</a> ({{ v.count }})</li>
+            {% endifnotequal %}{% endfor %}</ul>
+            <dd><a href="?{% remove_get_var request "facet_section" %}">&laquo; all sections</a></dd>
+            {% endif %}
+        {% else %}
+        <h3>Section</h3>
+        <ul>{% for v in facets.fields.section %}{% ifnotequal v.count 0 %}
+            <li><a href="{{ request.path }}?{% add_get_var request "facet_section" v.key %}">{{ v.name }}</a> ({{ v.count }})</li>
+        {% endifnotequal %}{% endfor %}</ul>
+        {% endif %}{% endif %}
+    </div>
+</div>
+
+<div class="quarter-column">
+    <h2>Users{% if form.cleaned_data.q %} <small>{{ user_results.count }} result{{ user_results.count|pluralize }}</small>{% endif %}</h2>
+    {% if user_results %}<ul class="link-list">
+        {% for u in user_results %}<li{% if forloop.last %} class="last"{% endif %}><a href="{{ u.object.get_absolute_url }}">{{ u.object.get_full_name }}</a></li>
+        {% endfor %}</ul>{% else %}<p>No users found.</p>{% endif %}
+</div>
+
+{% comment %}<div class="quarter-column">
+    <h2>Comments{% if form.cleaned_data.q %} <small>{{ comments.count }} result{{ comments.count|pluralize }}</small>{% endif %}</h2>
+    <ul class="link-list">
+        {% for o in comments %}<li{% if forloop.last %} class="last"{% endif %}><a href="{{ o.get_absolute_url }}">{{ o.user.get_full_name }} on {{ o.content_object.title }}</a>
+            <small>{{ o.submit_date|date:"l j F, Y" }}</small>
+            <p>{% include "articles/snippets/comment_summary.html" %}</p></li>
+        {% endfor %}</ul>
+</div>{% endcomment %}
+    
+</div>
+{% else %}<ul>
+    <form action="" method="get">
+    <li>{{ form.q }}</li>
+    <input type="submit" value="Submit" />
+    </form>
+</ul>
+{% endif %}{% endwith %}{% endblock %}

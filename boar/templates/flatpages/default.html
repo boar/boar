@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load typogrify %}
+{% block title %}{{ flatpage.title }} &mdash; {{ block.super }}{% endblock %}
+{% block content %}<h2>{{ flatpage.title }}</h2>
+{% block flatpage_content %}{{ flatpage.content|markdown|typogrify }}{% endblock %}
+{% endblock %}

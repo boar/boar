@@ -1,0 +1,11 @@
+{% extends "articles/article_detail/article.html" %}
+{% load articles %}
+{% load humanize %}
+{% load typogrify %}
+{% block articledetails %}<img width="169" height="140" src="http://maps.google.com/staticmap?key={{ GOOGLE_MAPS_API_KEY }}&amp;sensor=false&amp;markers={{ article.travel_metadata.location.y }},{{ article.travel_metadata.location.x }}&amp;size=169x140&amp;zoom=2&amp;maptype=hybrid" alt="" />{{ block.super }}{% endblock %}
+{% block related %}{% with article.travel_metadata|nearby|slice:":3" as nearby %}{% if nearby %}<div class="block">
+    <h3>Nearby</h3>
+    <ul class="link-list">{% for travel_metadata in nearby %}{% with travel_metadata.article as a %}
+        <li{% if forloop.last %} class="last"{% endif %}><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a> <small class="alt">{{ a.pub_date|naturalday }}</small></li>{% endwith %}{% endfor %}
+    </ul>
+</div>{% endif %}{% endwith %}{% endblock %}

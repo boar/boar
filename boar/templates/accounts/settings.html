@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load compress %}
+{% block extra_js %}{{ block.super }}{% compress js %}
+<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}static/js/src/urlify.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}static/js/src/forms.js"></script>{% endcompress %}
+<script type="text/javascript">
+    boar.refreshOnSessionChange = true;
+</script>
+{% endblock %}
+{% block title %}Mailing lists &mdash; {{ block.super }}{% endblock %}
+{% block content %}
+<div class="threequarter-column border">
+    <h2>Mailing lists</h2>
+    <p class="donthyphenate">If you are interested in writing for a section, subscribe to its mailing list to receive updates and information on commissioning meetings.</p>
+    <form method="post" action="{% url accounts_settings %}">
+        <h3>Your subscriptions</h3>
+        <div id="mailing-lists">
+            {{ mailing_lists_form.mailing_lists.errors }}
+            {{ mailing_lists_form.mailing_lists }}
+        </div>
+        <h3>Settings</h3>
+        <div class="settings">
+            <ol>
+                {% for f in settings_form %}<li>{{ f.errors }}{{ f.label_tag }} {{ f }}
+                {% if f.help_text %}<small>{{ f.help_text }}</small>{% endif %}</li>{% endfor %}
+            </ol>
+            <button type="submit">Save subscriptions and settings</button>
+        </div>
+    </form>
+</div>
+<div class="quarter-column">
+    <h3>Help</h3>
+    <p class="donthyphenate">You may already have an account on the website if you have written for the <em>Boar</em> or used it before we moved to Facebook logins. Try searching for your name using the box at the top of the page.</p>
+    <p class="donthyphenate">If you want to merge accounts, email <a href="mailto:tech@theboar.org">tech@theboar.org</a> with the usernames of both accounts.</p>
+</div>
+{% endblock %}

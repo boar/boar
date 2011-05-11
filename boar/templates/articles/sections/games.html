@@ -1,0 +1,29 @@
+{% extends "articles/sections/default.html" %}
+{% load articles %}
+{% load markup %}
+{% load typogrify %}
+{% load uploads %}
+{% block section-featured %}{% ifequal page_obj.number 1 %}{% ifequal featured|length 2 %}
+{% with featured.0 as a %}<div class="article-block-big content-column border">
+    <h2><a href="{{ featured.0.get_absolute_url }}">{{ featured.0.title|typogrify }}</a>{% if featured.0.game_metadata.platform %} <small>{{ featured.0.game_metadata.platform }}</small>{% endif %}</h2>
+    <small>{% include "articles/snippets/date.html" %}</small>
+    {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "main" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+    {{ featured.0.get_summary|markdown|typogrify }}
+</div>{% endwith %}
+
+{% with featured.1 as a %}<div class="article-block block-column">
+    <h3><a href="{{ featured.1.get_absolute_url }}">{{ featured.1.title|typogrify }}</a>{% if featured.1.game_metadata.platform %} <small>{{ featured.1.game_metadata.platform }}</small>{% endif %}</h3>
+    <small>{% include "articles/snippets/date.html" %}</small>
+    {% if featured.1.image %}<a href="{{ featured.1.get_absolute_url }}"><img src="{% upload_thumbnail featured.1.image "block" %}" alt="{{ featured.1.image }}" /></a>{% endif %}
+    {{ featured.1.get_summary|markdown|typogrify }}
+</div>{% endwith %}
+{% endifequal %}{% endifequal %}
+{% endblock %}
+{% block section-column2 %}<div class="quarter-column border">
+    {% archive_block all_articles date section.get_absolute_url %}
+    {% with 1 as no_image %}{% for topic in topics|slice:":3" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}
+{% block section-column3 %}<div class="quarter-column">
+    {% with "Genres" as topic_name %}{% include "articles/blocks/topics.html" %}{% endwith %}
+    {% with 1 as no_image %}{% for topic in topics|slice:"3:6" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}

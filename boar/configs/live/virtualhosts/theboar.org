@@ -1,0 +1,33 @@
+<VirtualHost *:80>
+    WSGIDaemonProcess boar-live user=web group=web threads=10 python-path=/var/www/theboar.org/lib/python2.5/site-packages
+    WSGIProcessGroup boar-live
+ 
+    WSGIScriptAlias /var/www/theboar.org/releases/current/boar/configs/live/live.wsgi
+    <Directory /var/www/theboar.org/releases/current/boar>
+        Order deny,allow
+        Allow from all
+    </Directory>
+    
+    ErrorLog /var/log/apache2/theboar.org-error.log
+    CustomLog /var/log/apache2/theboar.org-access.log combined
+	
+</VirtualHost>
+
+
+<VirtualHost *:80>
+	ServerName media.theboar.org
+	DocumentRoot /var/www/theboar.org/boar/media
+	<Directory />
+		Options -Indexes
+		ExpiresActive On
+		ExpiresDefault "access plus 10 years"
+	</Directory>
+</VirtualHost>
+
+        
+<VirtualHost *:80>
+        ServerName www.theboar.org
+        Redirect permanent / http://theboar.org/
+</VirtualHost>
+
+

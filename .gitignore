@@ -1,0 +1,14 @@
+._*
+*~
+*.pyc
+*.DS_Store
+/boar_ve/
+/boar/configs/local_settings.py
+/boar/media/CACHE/
+/boar/media/cartoons
+/boar/media/uploads
+/boar/media/podcasts
+/boar/media/archive
+/apache-solr-*
+/pip-log.txt
+*.swp

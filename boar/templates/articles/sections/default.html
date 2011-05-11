@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load articles %}
+{% load markup %}
+{% load pagination_tags %}
+{% load smart_if %}
+{% load typogrify %}
+{% block extra_head %}{{ block.super }}<link rel="alternate" type="application/atom+xml" title="The Boar: {{ section }}" href="{% url articles_feed_section section.slug %}" />{% endblock %}
+{% block title %}{{ section }}{% if date %} ({{ date|date:"F Y" }}){% endif %} &mdash; {{ block.super }}{% endblock %}
+{% block content %}<h2>{{ section }}{% if date %} <small>{{ date|date:"F Y" }}</small>{% endif %}</h2>
+{% autopaginate articles 25 as paginated_articles %}
+{% block section-featured %}{% ifequal page_obj.number 1 %}{% if featured.0 %}
+<div class="content-column border">
+    {% with featured.0 as a %}<div class="article-block-big">
+        <h2><a href="{{ featured.0.get_absolute_url }}">{{ featured.0.title|typogrify }}</a></h2>
+        <small>{% include "articles/snippets/date.html" %}</small>
+        {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}">{% load uploads %}<img src="{% upload_thumbnail featured.0.image "main" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+        {{ featured.0.get_summary|markdown|typogrify }}
+    </div>{% endwith %}
+
+    {% if featured.1 and featured.2 %}{% with featured.1 as a %}<div class="block-column border article-block">
+        <h3 class="headline"><a href="{{ featured.1.get_absolute_url }}">{{ featured.1.title|typogrify }}</a></h3>
+        <small>{% include "articles/snippets/date.html" %}</small>
+        {{ featured.1.get_summary|markdown|typogrify }}
+    </div>{% endwith %}
+    
+    {% with featured.2 as a %}<div class="block-column article-block">
+        <h3 class="headline"><a href="{{ featured.2.get_absolute_url }}">{{ featured.2.title|typogrify }}</a></h3>
+        <small>{% include "articles/snippets/date.html" %}</small>
+        {{ featured.2.get_summary|markdown|typogrify }}
+    </div>{% endwith %}{% endif %}
+</div>
+<div class="blockplusone-column">
+    {% include "articles/blocks/topics.html" %}
+</div>
+{% endif %}{% endifequal %}{% endblock %}
+<div class="half-column border">
+    {% ifequal page_obj.number 1 %}{% if featured.0 %}<h2>Latest</h2>{% endif %}{% endifequal %}
+    {% if articles %}<ul class="article-list" >{% for a in paginated_articles %}{% article_list_bit a %}{% endfor %}
+    </ul>{% else %}<p>Nothing here!</p>{% endif %}
+    {% paginate %}
+</div>
+{% block section-column2 %}<div class="quarter-column border">
+    {% archive_block all_articles date section.get_absolute_url %}
+    {% with 1 as no_image %}{% for topic in topics|slice:":3" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}
+{% block section-column3 %}<div class="quarter-column">
+    {% if page_obj.number != 1 or not featured.0 %}
+    {% include "articles/blocks/topics.html" %}
+    {% endif %}
+    {% with 1 as no_image %}{% for topic in topics|slice:"3:6" %}{% include "articles/blocks/topic.html" %}{% endfor %}{% endwith %}
+</div>{% endblock %}
+
+{% endblock %}

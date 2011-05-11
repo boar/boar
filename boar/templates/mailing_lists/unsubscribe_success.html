@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Unsubcribe &mdash; {{ block.super }}{% endblock %}
+{% block content %}
+<h2>Unsubscribe</h2>
+<p>You have unsubscribed from the {{ mailing_list.name }} mailing list. If you want to change any other subscriptions, go to your <a href="{% url accounts %}">mailing lists page</a>.</p>
+{% endblock %}

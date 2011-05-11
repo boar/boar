@@ -1,0 +1,4 @@
+{% if topics %}<div class="block">
+    <h3><a href="/{{ section.slug }}/topics/{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">{{ section.tag_name }}</a></h3>
+    <div>{% for topic in topics %}<a href="/{{ section.slug }}/{{ topic.slug }}/{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">{{ topic.name }}</a> &middot; {% endfor %}<a href="/{{ section.slug }}/topics/{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">More...</a></div>
+</div>{% endif %}

@@ -1,0 +1,44 @@
+{% load i18n %}
+<div class="inline-group">
+  <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
+{{ inline_admin_formset.formset.management_form }}
+{{ inline_admin_formset.formset.non_form_errors }}
+
+{% for inline_admin_form in inline_admin_formset %}
+<div class="inline-related{% if forloop.last %} last-related{% endif %}">
+  <h3><b>{{ inline_admin_formset.opts.verbose_name|title }}:</b>&nbsp;{% if inline_admin_form.original %}{{ inline_admin_form.original }}{% else %} #{{ forloop.counter }}{% endif %}
+  </h3>
+  {% if inline_admin_form.form.errors %}{{ inline_admin_form.form.errors }}{% endif %}
+  
+  <img src="{{ original.upload.url }}" width="480" height="{% widthratio original.upload.height original.upload.width 480 %}" id="thumb-{{ inline_admin_form.original.id }}" style="margin: 20px" />
+  
+  <script type="text/javascript">
+    $(window).load(function () {
+      $('img#thumb-{{ inline_admin_form.original.id }}').imgAreaSelect({
+          aspectRatio: '{{ inline_admin_form.original.size.width }}:{{ inline_admin_form.original.size.height }}',
+          selectionOpacity: 0,
+          outerOpacity: 0.8,
+          x1: parseInt(480 * $('#id_thumbnail_set-{{ forloop.counter0 }}-left').val()/{{ original.upload.width }}),
+          y1: parseInt(480 * $('#id_thumbnail_set-{{ forloop.counter0 }}-top').val()/{{ original.upload.width }}),
+          x2: parseInt(480 * $('#id_thumbnail_set-{{ forloop.counter0 }}-right').val()/{{ original.upload.width }}),
+          y2: parseInt(480 * $('#id_thumbnail_set-{{ forloop.counter0 }}-bottom').val()/{{ original.upload.width }}),
+          onSelectChange: function (img, s) {
+              $('#id_thumbnail_set-{{ forloop.counter0 }}-left').val(parseInt({{ original.upload.width }} * s.x1/480));
+              $('#id_thumbnail_set-{{ forloop.counter0 }}-top').val(parseInt({{ original.upload.width }} * s.y1/480));
+              $('#id_thumbnail_set-{{ forloop.counter0 }}-right').val(parseInt({{ original.upload.width }} * s.x2/480));
+              $('#id_thumbnail_set-{{ forloop.counter0 }}-bottom').val(parseInt({{ original.upload.width }} * s.y2/480));
+          }
+      });
+      $('#add_id_thumbnail_set-{{ forloop.counter0 }}-size, #id_thumbnail_set-{{ forloop.counter0 }}-size').hide();
+    });
+  </script>
+  
+  {% for fieldset in inline_admin_form %}
+    {% for line in fieldset %}{% for field in line %}{{ field.field }}{% endfor %}{% endfor %}
+  {% endfor %}
+  {{ inline_admin_form.pk_field.field }}
+  {{ inline_admin_form.fk_field.field }}
+</div>
+{% endfor %}
+
+</div>

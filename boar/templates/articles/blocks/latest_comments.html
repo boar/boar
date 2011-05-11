@@ -1,0 +1,8 @@
+{% load typogrify %}{% if comments %}<div class="block">
+    <h3>Latest comments</h3>
+    <ul class="link-list">
+        {% for o in comments|slice:":5" %}<li{% if forloop.last %} class="last"{% endif %}><a href="{{ o.get_absolute_url }}">{{ o.user.get_full_name }} on {{ o.content_object.title|typogrify }}</a>
+            <small>{{ o.submit_date|timesince }} ago</small>
+            <p>{% include "articles/snippets/comment_summary.html" %}</p></li>
+        {% endfor %}</ul>
+</div>{% endif %}

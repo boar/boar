@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load awards %}
+{% load markup %}
+{% load typogrify %}
+{% block title %}{{ ceremony.title }} &mdash; {{ block.super }}{% endblock %}
+{% block content %}
+<div id="awards">
+    <img src="{{ MEDIA_URL }}static/img/boris-crest-big-black.png" alt="" />
+    <h2>{{ ceremony.title|typogrify }}</h2>
+    <p id="awards-description" class="donthyphenate">{{ ceremony.description|typogrify|safe }}</p>
+    
+    {% if request.user.is_authenticated %}
+    <form action="" method="POST">
+        {% for field in form %}
+        <h3>{{ field.label }}</h3>
+        {% if field.errors %}
+        <ul class="errorlist">
+           {% for error in field.errors %}
+           <li>{{ error }}</li>
+           {% endfor %}
+        </ul>
+        {% endif %}
+        {% if request.user|has_voted_for_award:field.name %}
+            <p>You have voted on this award!</p>
+        {% else %}
+            {{ field.as_widget }}
+        {% endif %}
+        {% endfor %}
+        <button type="submit">Vote</button>
+    </form>
+    {% else %}
+    <p><fb:login-button perms="email" length="long" auto-logout-link="true">Login with Facebook to vote</fb:login-button></p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+{% extends "articles/sections/sub_section.html" %}
+{% block middle_column %}{% with 1 as no_image %}{% with sub_sections.albums as sub_section %}{% include "articles/blocks/sub_section.html" %}{% endwith %}{% endwith %}{% endblock %}
+{% block right_column %}{% with 1 as no_image %}{% with sub_sections.live as sub_section %}{% include "articles/blocks/sub_section.html" %}{% endwith %}{% endwith %}{% endblock %}

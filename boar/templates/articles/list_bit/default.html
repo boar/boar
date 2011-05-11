@@ -1,0 +1,6 @@
+{% load cache %}{% cache 600 list_bit a.pk forloop.last in_block no_image left in_section %}{% load markup %}{% load typogrify %}<li{% if forloop.last %} class="last"{% endif %}>
+    <h3>{% block list-bit-headline %}<a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a>{% endblock %}</h3>
+    <small>{% block list-bit-date %}{% include "articles/snippets/date.html" %}{% endblock %}</small>
+    {% if a.image and not no_image %}{% load uploads %}<a href="{{ a.get_absolute_url }}"><img src="{% if in_block %}{% upload_thumbnail a.image "block" %}{% else %}{% upload_thumbnail a.image "article-list" %}{% endif %}" alt="{{ a.image }}"{% if not in_block %} class="{% if left %}left{% else %}right{% endif %} top"{% endif %} /></a>{% endif %}
+    {% filter markdown|typogrify %}<span{% if a.image and not in_block %} class="article-list-image-right"{% endif %}>{% if not section %}<a href="{{ a.section.get_absolute_url}}">{{ a.section }}:</a> {% endif %}{% block list-bit-summary %}{{ a.get_summary }}{% endblock %}</span>{% endfilter %}
+</li>{% endcache %}
