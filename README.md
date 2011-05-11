@@ -1,5 +1,7 @@
-Boar website
-============
+The Boar website
+================
+
+The source code of [theboar.org](http://theboar.org/).
 
 Requirements
 ------------
@@ -14,17 +16,14 @@ Setting up a development environment
 All these sequences of commands expect you to be in the same directory as this 
 readme.
 
-Fabric is needed to complete the rest of the installation:
-    
+To install dependencies in Debian or Ubuntu, run:
+
+    $ sudo apt-get install csstidy python-cairo python-cjson python-imaging python-psycopg2 libgeos-3.0.0 proj postgis gdal-bin postgresql-8.3-postgis
     $ sudo easy_install pip
-    $ sudo pip install fabric
 
-To create a development environment in Debian, run this:
+Either in a virtualenv, or as root if you really have to:
 
-    $ fab localhost setup_dev
-
-If ``fabfile.py`` or ``requirements.txt`` gets updated in the future, you may 
-need to delete the ``boar_ve/`` directory and rerun these commands.
+    $ pip install -r requirements.txt
 
 ### Installing the database
 
