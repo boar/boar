@@ -18,7 +18,6 @@ class ArticleAdminModelForm(forms.ModelForm):
                     if kwargs['instance'].pk is None:
                         kwargs['initial'][f.name] = []
                     else:
-                        print f.value_from_object(kwargs['instance'])
                         kwargs['initial'][f.name] = [obj.tag.pk for obj in f.value_from_object(kwargs['instance'])]
         super(ArticleAdminModelForm, self).__init__(*args, **kwargs)
         if 'pub_date' in self.initial and isinstance(self.initial['pub_date'], basestring):
