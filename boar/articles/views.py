@@ -221,8 +221,11 @@ class SectionView(UrlsView):
     
     def get_topics_for_articles(self, articles):
         try:
-            all_topics = Tag.objects.usage_for_queryset(articles, counts=True)
-            return sorted(all_topics, key=lambda x: x.count, reverse=True)[:20]
+            return Tag.objects.filter(
+                taggedarticle__content_object__in=articles
+            ).annotate(
+                models.Count('taggedarticle')
+            ).distinct().order_by('-taggedarticle__count')[:20]
         except Article.DoesNotExist:
             return []
     
