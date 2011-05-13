@@ -264,7 +264,7 @@ class CommentSectionView(SectionView):
         return {}
     
     def get_featured(self, articles):
-        return articles.filter(featured=True)[:3]
+        return articles.filter(featured=True)[:2]
 
 class FeaturesSectionView(SectionView):
     slug = 'features'
