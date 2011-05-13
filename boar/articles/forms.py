@@ -8,6 +8,7 @@ from boar.articles.widgets import MarkItUpWidget
 
 class ArticleAdminModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        # Make TagManager act like a ManyToManyField
         if 'initial' not in kwargs:
             kwargs['initial'] = {}
         if kwargs.get('instance', None):
@@ -19,7 +20,6 @@ class ArticleAdminModelForm(forms.ModelForm):
                     else:
                         print f.value_from_object(kwargs['instance'])
                         kwargs['initial'][f.name] = [obj.tag.pk for obj in f.value_from_object(kwargs['instance'])]
-        print args, kwargs
         super(ArticleAdminModelForm, self).__init__(*args, **kwargs)
         if 'pub_date' in self.initial and isinstance(self.initial['pub_date'], basestring):
             self.initial['pub_date'] =  datetime.datetime(*time.strptime(self.initial['pub_date'], '%Y-%m-%d %H:%M:%S')[:6])
