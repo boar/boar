@@ -34,11 +34,8 @@ class FacebookConnectMiddleware(object):
                     info = graph.get_object('me')
                 except facebook.GraphAPIError, e:
                     # Session timed out
-                    if e.type == 102:
-                        logout(request)
-                        return
-                    else:
-                        raise
+                    logout(request)
+                    return
                 except IOError:
                     # HTTP error, such as 401 Unauthorized
                     logout(request)
