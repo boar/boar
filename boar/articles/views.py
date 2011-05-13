@@ -307,7 +307,7 @@ class MoneySectionView(SectionView):
     section_template = 'articles/sections/money.html'
     
     def get_featured(self, articles):
-        return articles.filter(featured=True)[:3]
+        return articles.filter(featured=True)[:2]
 
 
 class MusicSectionView(SectionView):
