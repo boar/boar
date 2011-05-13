@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.http import urlquote_plus
 from ordered_model.admin import OrderedModelAdmin
 from reversion.admin import VersionAdmin
+from taggit.models import Tag as TaggitTag
 
 from boar.articles.forms import ArticleAdminModelForm
 from boar.articles.models import *
@@ -26,6 +27,13 @@ class PositionAdmin(admin.ModelAdmin):
 
 admin.site.register(Position, PositionAdmin)
 
+class TagAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name', 'slug', 'created')
+    search_fields = ('name',)
+
+admin.site.unregister(TaggitTag)
+admin.site.register(Tag, TagAdmin)
 
 ######################################
 # Metadata inlines
@@ -60,6 +68,7 @@ class TravelMetadataInline(OSMGeoStackedInline):
 
 class ArticleAdmin(VersionAdmin):
     date_hierarchy = 'pub_date'
+    # tags field is also filter_horizontal - forced in forms.py
     filter_horizontal = ('authors',)
     form = ArticleAdminModelForm
     inlines = [
@@ -90,7 +99,7 @@ class ArticleAdmin(VersionAdmin):
     )
     
     def get_tags(self, obj):
-        return obj.tags
+        return ', '.join(t.name for t in obj.tags.all())
     
     class Media:
         js = (

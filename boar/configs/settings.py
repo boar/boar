@@ -46,8 +46,7 @@ INSTALLED_APPS = (
     'shorturls',
     'sorl.thumbnail',
     'south',
-    'syndication',
-    'tagging',
+    'taggit',
     'threadedcomments',
     'typogrify',
     
@@ -72,7 +71,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'boar.articles.middleware.ArticleMiddleware', # before cacher
     'boar.cacher.middleware.CachedPageMiddleware',
-    'django.contrib.csrf.middleware.CsrfMiddleware',
+    'django.middleware.csrf.CsrfMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'boar.facebook_connect.middleware.FacebookConnectMiddleware', # after auth
@@ -146,12 +145,15 @@ COMMENTS_APP = 'boar.comments_extra'
 # Database
 ######################################
 
-DATABASE_ENGINE = 'postgresql_psycopg2'
-DATABASE_NAME = 'boar'
-DATABASE_USER = ''
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
-DATABASE_PORT = ''
+DATABASES = {
+    'default': {
+        'NAME': 'boar',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'USER': '',
+        'PASSWORD': ''
+    },
+}
+
 POSTGIS_SQL_PATH = '/usr/share/postgresql-8.3-postgis'
 
 ######################################
@@ -262,15 +264,17 @@ SKIP_SOUTH_TESTS = True
 
 TEMPLATE_DEBUG = DEBUG
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
 )
 TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'django.core.context_processors.request',

@@ -89,7 +89,7 @@ def get_positions(parser, token):
 
 @register.filter
 def related_to(obj, num):
-    return Article.tagged.related_to(obj, num=int(num), queryset=Article.objects.filter(published=True))
+    return filter(lambda a: a.published, obj.tags.similar_objects())[:int(num)]
 
 
 class TopicArticlesNode(template.Node):
@@ -105,7 +105,8 @@ class TopicArticlesNode(template.Node):
             articles = articles.filter(section=context['section'])
         if 'exclude' in context:
             articles = articles.exclude(pk__in=context['exclude'])
-        context["topic_articles"] = Article.tagged.with_all([self.topic.resolve(context)], queryset=articles)
+        
+        context["topic_articles"] = articles.filter(tags__in=[self.topic.resolve(context)]).distinct()
         return u''
 
 @register.tag

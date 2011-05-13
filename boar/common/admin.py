@@ -4,8 +4,6 @@ from django.contrib.admin.models import LogEntry
 from django.contrib.gis.admin.widgets import OpenLayersWidget
 from django.contrib.gis.gdal import OGRGeomType
 from django.contrib.gis.db import models
-from tagging.models import Tag, TaggedItem
-from tagging.forms import TagAdminForm
 
 class LogEntryAdmin(admin.ModelAdmin):
     list_display = ('get_object', 'content_type', 'user', 'action_time', 'action_flag_name', 'change_message')
@@ -24,17 +22,6 @@ class LogEntryAdmin(admin.ModelAdmin):
         return actions[obj.action_flag]
     action_flag_name.short_description = 'Type'
 
-admin.site.register(LogEntry, LogEntryAdmin)
-
-class TagAdmin(admin.ModelAdmin):
-    form = TagAdminForm
-    prepopulated_fields = {'slug': ('name',)}
-    list_display = ('name', 'slug', 'created')
-    search_fields = ('name',)
-
-admin.site.unregister(Tag)
-admin.site.register(Tag, TagAdmin)
-admin.site.unregister(TaggedItem)
 
 
 class GeoStackedInline(admin.StackedInline):

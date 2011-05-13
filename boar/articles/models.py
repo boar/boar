@@ -8,9 +8,8 @@ from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.utils.text import truncate_words
 from ordered_model.models import OrderedModel
-import tagging
-from tagging.fields import TagField
-from tagging.models import Tag
+from taggit.managers import TaggableManager
+from taggit.models import ItemBase, TagBase
 
 
 class Section(OrderedModel):
@@ -51,6 +50,31 @@ class Position(models.Model):
         ordering = ['order',]
 
 
+class Tag(TagBase):
+    created = models.DateTimeField(editable=False, default=datetime.datetime.now)
+    
+    class Meta:
+        ordering = ['name']
+        verbose_name = "Tag"
+        verbose_name_plural = "Tags"
+    
+
+class TaggedArticle(ItemBase):
+    tag = models.ForeignKey(Tag)
+    content_object = models.ForeignKey('Article')
+    
+    @classmethod
+    def tags_for(cls, model, instance=None):
+        if instance is not None:
+            return cls.tag_model().objects.filter(**{
+                'taggedarticle__content_object': instance
+            })
+        return cls.tag_model().objects.filter(**{
+            'taggedarticle__content_object__isnull': False
+        }).distinct()
+    
+
+
 class Article(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(help_text='Used in the URL, generated automatically. Alphanumeric and dashes only.')
@@ -61,7 +85,11 @@ class Article(models.Model):
     approved = models.BooleanField(default=True, editable=False)
     published = models.BooleanField(default=False, help_text="Until published, the article will not be listed on the site.")
     featured = models.BooleanField(default=False, help_text="Featured articles will be displayed at the top of the section pages and on the home page. An image should almost always be attached.")
-    tags = TagField(help_text="In order of specificness/importance. Tags can be separated by commas <i>or</i> spaces, so if you are using a single tag that is comprised of multiple words, surround it with quotes.")
+    tags = TaggableManager(
+        through=TaggedArticle,
+        blank=True,
+        help_text="In order of specificness/importance. Tags can be separated by commas <i>or</i> spaces, so if you are using a single tag that is comprised of multiple words, surround it with quotes."
+    )
     authors = models.ManyToManyField(User, blank=True)
     section = models.ForeignKey(Section)
     tone = models.CharField(max_length=25, default='article', help_text='Determines the template used to display the article, and the associated metadata.', choices=(
@@ -108,11 +136,6 @@ class Article(models.Model):
 
     def __unicode__(self):
         return self.title
-
-try:
-    tagging.register(Article, tag_descriptor_attr='tags_manager')
-except tagging.AlreadyRegistered:
-    pass
 
 
 class TopicMetadata(models.Model):

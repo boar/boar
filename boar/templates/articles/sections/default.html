@@ -2,7 +2,6 @@
 {% load articles %}
 {% load markup %}
 {% load pagination_tags %}
-{% load smart_if %}
 {% load typogrify %}
 {% block extra_head %}{{ block.super }}<link rel="alternate" type="application/atom+xml" title="The Boar: {{ section }}" href="{% url articles_feed_section section.slug %}" />{% endblock %}
 {% block title %}{{ section }}{% if date %} ({{ date|date:"F Y" }}){% endif %} &mdash; {{ block.super }}{% endblock %}

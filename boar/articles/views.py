@@ -8,10 +8,8 @@ from django.http import Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from tagging.models import Tag
-
 from boar.archive.models import Volume
-from boar.articles.models import Article, Section
+from boar.articles.models import Article, Section, Tag
 from boar.articles.tasks import HitTask
 from boar.cartoons.models import Cartoon
 from boar.common.views import UrlsView
@@ -81,33 +79,18 @@ class SectionView(UrlsView):
     # Todo - create a decorator that will make do_index_archive with separate 
     # regex and URL reverse identifier
     
-    def do_topics(self, request, year=None, month=None):
-        months = [m.date() for m in Article.objects.filter(published=True, section=self.section).dates('pub_date', 'month')]
-        # Specific date or last month
-        date = self.get_date(year, month)
-        if date is None:
-            date = months[-1]
-        filters = {'section': self.section}
-        filters.update({'pub_date__range': self._filter_range(date)})
-        if 'ajax' in request.GET:
-            template = 'articles/topic_cloud.html'
-        else:
-            template = 'articles/topic_list.html'
-        return self.render(request, template, {
-            'section': self.section,
-            'months': months,
-            'cloud': Article.tags_manager.cloud(filters=filters),
-            'date': date,
-        })
-    do_topics.urlregex = r'^topics/((?P<year>\d{4})/(?P<month>[a-z]{3})/)?$'
-    
     def do_ztopic(self, request, slug, year=None, month=None):
         slug_list = slug.split('+')
-        topics = Tag.objects.filter(slug__in=slug_list)
+        topics = Tag.objects.filter(slug__in=slug_list).distinct()
         # __in will ignore missing ones
         if len(topics) != len(slug_list):
             raise Http404("Topic doesn't exist.")
-        all_articles = Article.tagged.with_all(topics).filter(published=True, section=self.section).select_related('section', 'image')
+        all_articles = Article.objects.filter(
+            published=True, 
+            section=self.section
+        ).select_related('section', 'image').distinct()
+        for t in topics:
+            all_articles = all_articles.filter(tags__in=[t])
         date = self.get_date(year, month)
         articles = self.filter_archive(all_articles, date)
         return self.render(request, self.topic_template, {
@@ -117,7 +100,8 @@ class SectionView(UrlsView):
             'articles': articles,
             'date': date,
             'all_articles': all_articles,
-            'related': sorted(Tag.objects.related_for_model(topics, Article, counts=True), key=lambda x: x.count, reverse=True)[:8],
+            # FIXME
+            #'related': sorted(Tag.objects.related_for_model(topics, Article, counts=True), key=lambda x: x.count, reverse=True)[:8],
             'absolute_url': reverse('section_%s_ztopic' % self.section.slug, kwargs={'slug': slug})
         })
     do_ztopic.urlregex = r'^(?P<slug>[-\w\+]+)/((?P<year>\d{4})/(?P<month>[a-z]{3})/)?$'

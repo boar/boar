@@ -10,7 +10,7 @@
     <p id="awards-description" class="donthyphenate">{{ ceremony.description|typogrify|safe }}</p>
     
     {% if request.user.is_authenticated %}
-    <form action="" method="POST">
+    <form action="" method="POST">{% csrf_token %}
         {% for field in form %}
         <h3>{{ field.label }}</h3>
         {% if field.errors %}

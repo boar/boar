@@ -15,7 +15,7 @@
 {% endif %}
 <div id="content-main">
     <p style="text-align: center"><fb:login-button perms="email" length="long"></fb:login-button><br /><br />or...</p>
-<form action="{{ app_path }}" method="post" id="login-form">
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
   <div class="form-row">
     <label for="id_username">{% trans 'Username:' %}</label> <input type="text" name="username" id="id_username" />
   </div>

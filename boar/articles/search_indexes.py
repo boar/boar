@@ -15,7 +15,7 @@ class ArticleIndex(indexes.RealTimeSearchIndex):
         return obj.section.slug
     
     def prepare_tag(self, obj):
-        return (o.slug for o in obj.tags_manager.all())
+        return (o.slug for o in obj.tags.all())
     
     def get_queryset(self):
         return super(ArticleIndex, self).get_queryset().exclude(published=False)

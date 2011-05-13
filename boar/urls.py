@@ -30,8 +30,6 @@ handler500 = 'boar.views.server_error'
 urlpatterns = patterns('',
     (r'^$', 'boar.articles.views.home'),
     
-    (r'^tests/', include('syndication.tests.urls')),
-    
     (r'^accounts/', include('boar.accounts.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

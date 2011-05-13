@@ -20,7 +20,7 @@
 
 
 {% endblock %}
-{% block content %}{% with article.tags_manager.all as topics %}
+{% block content %}{% with article.tags.all as topics %}
 <div class="content-column border">
     <div id="article-header">
         {% block article-header %}<h2 class="headline">{{ article.title|typogrify }}</h2>

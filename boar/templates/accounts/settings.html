@@ -12,7 +12,7 @@
 <div class="threequarter-column border">
     <h2>Mailing lists</h2>
     <p class="donthyphenate">If you are interested in writing for a section, subscribe to its mailing list to receive updates and information on commissioning meetings.</p>
-    <form method="post" action="{% url accounts_settings %}">
+    <form method="post" action="{% url accounts_settings %}">{% csrf_token %}
         <h3>Your subscriptions</h3>
         <div id="mailing-lists">
             {{ mailing_lists_form.mailing_lists.errors }}

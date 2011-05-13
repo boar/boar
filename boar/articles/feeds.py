@@ -1,9 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.contrib.syndication.views import Feed, add_domain
 from django.utils.feedgenerator import Atom1Feed
-from boar.articles.models import Article, Section, PodcastMetadata
-from syndication.views import Feed, add_domain
-from tagging.models import Tag
+from boar.articles.models import Article, Section, PodcastMetadata, Tag
 
 ITEMS = 30
 
@@ -52,7 +51,7 @@ class ArticlesFeed(Feed):
         return obj.pub_date
     
     def item_categories(self, obj):
-        return obj.tags_manager.all()
+        return [t.name for t in obj.tags.all()]
     
     def item_enclosure_url(self, obj):
         if obj.podcast_metadata:
@@ -99,7 +98,11 @@ class TopicFeed(ArticlesFeed):
         
     def items(self, obj):
         return self._add_podcast_metadata(
-            Article.tagged.with_all([obj['topic']]).filter(published=True, section=obj['section'])[:ITEMS]
+            Article.objects.filter(
+                published=True, 
+                section=obj['section'], 
+                tags__in=[obj['topic']]
+            )[:ITEMS]
         )
     
 
@@ -121,3 +124,4 @@ class UserFeed(ArticlesFeed):
             obj.article_set.filter(published=True)[:ITEMS]
         )
         
+

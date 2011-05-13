@@ -5,7 +5,7 @@
 {% block content %}
   {% load comments %}
   <h2>Comment</h2>
-  <form action="{% comment_form_target %}" method="post" class="comment-preview">
+  <form action="{% comment_form_target %}" method="post" class="comment-preview">{% csrf_token %}
     {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
     {% if not form.errors %}
       <blockquote>{{ comment|linebreaks }}</blockquote>

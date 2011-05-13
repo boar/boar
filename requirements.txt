@@ -2,7 +2,7 @@
 python-dateutil<2.0
 BeautifulSoup
 -e git://github.com/tymofij/clevercss.git@19673ad#egg=clevercss
-Django==1.1.1
+Django==1.3
 feedparser==4.1
 Graphication==0.1.0
 Markdown==2.0.3
@@ -20,7 +20,7 @@ celery==1.0.1
 pysolr==2.0.9
 smartypants==1.6.0.3
 sorl-thumbnail==3.2.5
-South==0.7
+South==0.7.3
 -e git://github.com/mintchaos/django_compressor.git@8f57651#egg=django_compressor
 -e git://github.com/bfirsh/django-ordered-model.git@1814f6fee0#egg=django-ordered-model
 -e git://github.com/robhudson/django-debug-toolbar.git@d05dcbb4aa93b1#egg=django-debug-toolbar
@@ -28,6 +28,6 @@ South==0.7
 -e git://github.com/mintchaos/django_inlines.git@cb22e00d#egg=django_inlines
 -e git://github.com/ericflo/django-pagination.git@1c414c8#egg=django-pagination
 -e git://github.com/bfirsh/django-shorturls.git@92ac4824#egg=django-shorturls
--e git://github.com/bfirsh/syndication-view.git@29beb3ba5#egg=syndication-view
--e git://github.com/bfirsh/django-tagging.git@6c2bbc05e#egg=django-tagging
 -e git://github.com/HonzaKral/django-threadedcomments.git@3df699ced#egg=django-threadedcomments
+django-taggit==0.9.3
+

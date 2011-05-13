@@ -2,5 +2,5 @@
 {% block title %}Unsubscribe &mdash; {{ block.super }}{% endblock %}
 {% block content %}
 <h2>Unsubscribe</h2>
-<p>Are you sure you want to unsubscribe from the {{ mailing_list.name }} mailing list? <form action="" method="POST"><button type="submit">Unsubscribe</button></form></p>
+<p>Are you sure you want to unsubscribe from the {{ mailing_list.name }} mailing list? <form action="" method="POST">{% csrf_token %}<button type="submit">Unsubscribe</button></form></p>
 {% endblock %}
