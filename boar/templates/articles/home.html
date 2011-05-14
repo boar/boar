@@ -7,18 +7,18 @@
 {% block title %}{{ block.super }} &mdash; The University of Warwick Students&rsquo; Newspaper{% endblock %}
 {% block body_id %}home{% endblock %}
 {% block extra_head %}{{ block.super }}
-<meta property="og:title" content="The Boar" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://theboar.org/" />
-<meta property="og:image" content="{{ MEDIA_URL}}static/img/boar-head.png" />
-<meta name="description" property="og:description" content="The University of Warwick students&rsquo; newspaper, published fortnightly on Tuesday." />
+<meta property="og:title" content="The Boar">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://theboar.org/">
+<meta property="og:image" content="{{ MEDIA_URL}}static/img/boar-head.png">
+<meta name="description" property="og:description" content="The University of Warwick students&rsquo; newspaper, published fortnightly on Tuesday.">
 {% endblock %}
 {% block content %}
 <div class="content-column border">
     {% with featured.0 as a %}<div class="article-block-big">
         <h2><a href="{{ featured.0.get_absolute_url }}">{{ featured.0.title|typogrify }}</a></h2>
         <small>{% include "articles/snippets/date.html" %}</small>
-        {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "main" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+        {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "main" %}" alt="{{ featured.0.image }}"></a>{% endif %}
         {{ featured.0.get_summary|markdown|typogrify }}
     </div>{% endwith %}
 
@@ -63,7 +63,7 @@
 <div class="blockplusone-column">
   <div class="block archive-block">
     <h3><a href="{% url archive %}">Newspaper</h3>
-    <a href="{{ latest_issue.get_absolute_url }}"><img src="{% thumbnail latest_issue.get_front_page.image 250x10000 %}" alt="{{ issue.title }}" width="250" /></a>
+    <a href="{{ latest_issue.get_absolute_url }}"><img src="{% thumbnail latest_issue.get_front_page.image 250x10000 %}" alt="{{ issue.title }}" width="250"></a>
   </div>
 
   {% latest_comments_block %}

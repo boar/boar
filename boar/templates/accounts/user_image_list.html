@@ -9,7 +9,7 @@
 <div class="photography-large">
     {% with object.image_set.published as images %}
     {% autopaginate images 30 %}
-    {% if images %}{% for i in images %}<a href="{% url user_image_detail object.username i.id %}"><img src="{% thumbnail i.upload 300x300 crop="smart" %}" alt="{{ i.title }}" width="300" height="300" class="top {% if forloop.counter|divisibleby:"3" %}right{% else %}left{% endif %}"/></a> {% endfor %}</ul>{% else %}<p>{{ object.first_name }} has no published photographs.</p>{% endif %}
+    {% if images %}{% for i in images %}<a href="{% url user_image_detail object.username i.id %}"><img src="{% thumbnail i.upload 300x300 crop="smart" %}" alt="{{ i.title }}" width="300" height="300" class="top {% if forloop.counter|divisibleby:"3" %}right{% else %}left{% endif %}"></a> {% endfor %}</ul>{% else %}<p>{{ object.first_name }} has no published photographs.</p>{% endif %}
     {% paginate %}
 </div>
 {% endwith %}

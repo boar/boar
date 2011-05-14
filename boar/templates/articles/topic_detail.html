@@ -4,8 +4,8 @@
 {% load pagination_tags %}
 {% load typogrify %}
 {% load uploads %}
-{% block extra_head %}{{ block.super }}<link rel="alternate" type="application/atom+xml" title="The Boar: {{ section }}" href="{% url articles_feed_section section.slug %}" />
-<link rel="alternate" type="application/atom+xml" title="The Boar: {{ section }}: {{ topics.0 }}" href="{% url articles_feed_topic section.slug topics.0.slug %}" />{% endblock %}
+{% block extra_head %}{{ block.super }}<link rel="alternate" type="application/atom+xml" title="The Boar: {{ section }}" href="{% url articles_feed_section section.slug %}">
+<link rel="alternate" type="application/atom+xml" title="The Boar: {{ section }}: {{ topics.0 }}" href="{% url articles_feed_topic section.slug topics.0.slug %}">{% endblock %}
 {% block title %}{% for topic in topics %}{{ topic.name }}{% if forloop.last %}{% else %}{% ifequal forloop.revcounter0 1 %} and {% else %}, {% endifequal %}{% endif %}{% endfor %}{% if date %} ({{ date|date:"F Y" }}){% endif %} &mdash; {{ section }} &mdash; {{ block.super }}{% endblock %}
 {% block content %}
 <div class="threequarter-column border">
@@ -17,7 +17,7 @@
     </div>
     <div class="quarter-column">
         {% ifequal topics|length 1 %}{% if topics.0.metadata %}{% with topics.0.metadata as m %}<div class="block">
-            {% if m.image %}<img src="{% upload_thumbnail m.image "article-list" %}" alt="{{ m.image }}" />{% endif %}
+            {% if m.image %}<img src="{% upload_thumbnail m.image "article-list" %}" alt="{{ m.image }}">{% endif %}
             {% if m.description %}{{ m.description|markdown|typogrify }}{% endif %}
         </div>{% endwith %}{% endif %}{% endifequal %}
         {% if related %}<div class="block">

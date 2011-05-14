@@ -6,7 +6,7 @@
 {% block title %}{{ cartoon.date|date:"j/n/Y" }} &mdash; Cartoon &mdash; Comment &mdash; {{ block.super }}{% endblock %}
 {% block content %}<h2><a href="/comment/">Comment</a>: Cartoon: {{ cartoon.date|date:"j/n/Y" }}</h2>
 <div class="content-column border">
-    <img src="{% thumbnail cartoon.cartoon 616x10000 %}" alt="Cartoon for {{ cartoon.date|date:"j/n/Y" }}" class="left top" />
+    <img src="{% thumbnail cartoon.cartoon 616x10000 %}" alt="Cartoon for {{ cartoon.date|date:"j/n/Y" }}" class="left top">
     
     {% spaceless %}
     {% with cartoon.get_previous_by_date as previous %}{% with cartoon.get_next_by_date as next %}

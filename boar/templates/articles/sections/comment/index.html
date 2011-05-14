@@ -10,7 +10,7 @@
 {% for a in featured %}{% with 1 as always_left %}{% article_list_bit a %}{% endwith %}{% endfor %}
 </ul>{% if cartoon %}</div>
 <div class="half-column">
-    <a href="{{ cartoon.get_absolute_url }}"><img src="{% thumbnail cartoon.cartoon 450x10000 %}" alt="Cartoon for {{ cartoon.date|date:"j/n/Y" }}" class="left top" /></a>
+    <a href="{{ cartoon.get_absolute_url }}"><img src="{% thumbnail cartoon.cartoon 450x10000 %}" alt="Cartoon for {{ cartoon.date|date:"j/n/Y" }}" class="left top"></a>
     <div class="more"><a href="{{ cartoon.get_absolute_url }}">More cartoons...</a></div>
 </div>{% endif %}{% endif %}
 {% endblock %}

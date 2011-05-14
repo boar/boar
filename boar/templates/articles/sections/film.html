@@ -22,15 +22,15 @@
 
 <div class="clearfix">
     <div class="block-column border article-block">
-        {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "block" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+        {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "block" %}" alt="{{ featured.0.image }}"></a>{% endif %}
         {{ featured.0.get_summary|markdown|typogrify }}
     </div>
     <div class="block-column border article-block">
-        {% if featured.1.image %}<a href="{{ featured.1.get_absolute_url }}"><img src="{% upload_thumbnail featured.1.image "block" %}" alt="{{ featured.1.image }}" /></a>{% endif %}
+        {% if featured.1.image %}<a href="{{ featured.1.get_absolute_url }}"><img src="{% upload_thumbnail featured.1.image "block" %}" alt="{{ featured.1.image }}"></a>{% endif %}
         {{ featured.1.get_summary|markdown|typogrify }}
     </div>
     <div class="block-column article-block">
-        {% if featured.2.image %}<a href="{{ featured.2.get_absolute_url }}"><img src="{% upload_thumbnail featured.2.image "block" %}" alt="{{ featured.2.image }}" /></a>{% endif %}
+        {% if featured.2.image %}<a href="{{ featured.2.get_absolute_url }}"><img src="{% upload_thumbnail featured.2.image "block" %}" alt="{{ featured.2.image }}"></a>{% endif %}
         {{ featured.2.get_summary|markdown|typogrify }}
     </div>
 </div>{% endif %}{% endifequal %}

@@ -20,7 +20,7 @@ $(function(){
         map.setMapType(G_HYBRID_MAP);
         map.setCenter(new GLatLng(35, 0), 1);
         {% for a in articles %}{% if a.travel_metadata.location %}createMarker(map, {{ a.travel_metadata.location.y }}, {{ a.travel_metadata.location.x }}, "{% filter escapejs %}<h4><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a></h4>
-{% comment %}{% if a.image %}<a href="{{ a.get_absolute_url }}"><img src="{% upload_thumbnail a.image "article-list" %}" alt="{{ a.image }}" /></a>{% endif %}{% endcomment %}
+{% comment %}{% if a.image %}<a href="{{ a.get_absolute_url }}"><img src="{% upload_thumbnail a.image "article-list" %}" alt="{{ a.image }}"></a>{% endif %}{% endcomment %}
 {{ a.get_summary|markdown|typogrify }}{% endfilter %}");
         {% endif %}{% endfor %}
         map.addControl(new GSmallMapControl());
@@ -31,7 +31,7 @@ $(function(){
 {% with featured.0 as a %}<div class="article-block-big half-column border">
     <h2><a href="{{ a.get_absolute_url }}">{{ a.title|typogrify }}</a></h2>
     <small>{% include "articles/snippets/date.html" %}</small>
-    {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "half" %}" alt="{{ featured.0.image }}" /></a>{% endif %}
+    {% if featured.0.image %}<a href="{{ featured.0.get_absolute_url }}"><img src="{% upload_thumbnail featured.0.image "half" %}" alt="{{ featured.0.image }}"></a>{% endif %}
     {{ featured.0.get_summary|markdown|typogrify }}
 </div>{% endwith %}
 

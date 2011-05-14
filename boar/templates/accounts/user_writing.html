@@ -5,7 +5,7 @@
 {% load thumbnail %}
 {% load typogrify %}
 {% block title %}Writing &mdash; {{ object.get_full_name }} &mdash; {{ block.super }}{% endblock %}
-{% block extra_head %}{{ block.super }}<link rel="alternate" type="application/atom+xml" title="The Boar: {{ object.get_full_name }}" href="{% url articles_feed_user object.username %}" />{% endblock %}
+{% block extra_head %}{{ block.super }}<link rel="alternate" type="application/atom+xml" title="The Boar: {{ object.get_full_name }}" href="{% url articles_feed_user object.username %}">{% endblock %}
 {% block content %}<h2><a href="{% url user_detail object.username %}">{{ object.get_full_name }}</a>: Writing</h2>
 <div class="content-column border">
     {% with object.article_set.published as articles %}
@@ -15,7 +15,7 @@
 </div>
 <div class="block-column">
     {% if object.get_profile.photo or object.get_profile.about %}<h3><a href="{% url user_detail object.username %}">Profile</a></h3>
-    {% if object.get_profile.photo %}<img src="{% thumbnail object.get_profile.photo 120x120 crop %}" alt="{{ object.get_full_name }}" class="right top" width="120" height="120" />{% endif %}
+    {% if object.get_profile.photo %}<img src="{% thumbnail object.get_profile.photo 120x120 crop %}" alt="{{ object.get_full_name }}" class="right top" width="120" height="120">{% endif %}
     {% if object.get_profile.about %}{{ object.get_profile.about|markdown|typogrify }}{% endif %}{% endif %}
 </div>
 {% endwith %}

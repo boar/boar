@@ -2,6 +2,6 @@
     {% if comment.id %}{% get_comment_form for article as comment_form with comment.id %}{% else %}{% get_comment_form for article as comment_form %}{% endif %}
     {{ comment_form.comment }}
     {{ comment_form.content_type }}{{ comment_form.object_pk }}{{ comment_form.parent }}{{ comment_form.security_hash }}{{ comment_form.timestamp }}
-    <input type="hidden" name="next" value="{{ request.path }}" />
+    <input type="hidden" name="next" value="{{ request.path }}">
     <button type="submit">Comment with Facebook</button>
 </form>

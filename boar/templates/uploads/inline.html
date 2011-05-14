@@ -10,7 +10,7 @@
   </h3>
   {% if inline_admin_form.form.errors %}{{ inline_admin_form.form.errors }}{% endif %}
   
-  <img src="{{ original.upload.url }}" width="480" height="{% widthratio original.upload.height original.upload.width 480 %}" id="thumb-{{ inline_admin_form.original.id }}" style="margin: 20px" />
+  <img src="{{ original.upload.url }}" width="480" height="{% widthratio original.upload.height original.upload.width 480 %}" id="thumb-{{ inline_admin_form.original.id }}" style="margin: 20px">
   
   <script type="text/javascript">
     $(window).load(function () {

@@ -1,2 +1,2 @@
-{% load thumbnail %}<p class="inline"><img src="{% thumbnail object.upload size crop %}" alt="{{ object.title }}" />
+{% load thumbnail %}<p class="inline"><img src="{% thumbnail object.upload size crop %}" alt="{{ object.title }}">
 {% if object.caption or object.author %}<span class="arrows">&raquo;</span>{% endif %}{% if object.caption %} {{ object.caption }}{% endif %}{% if object.author %} <small>photo: <a href="{{ object.author.get_absolute_url }}">{{ object.author.get_full_name }}</a></small>{% endif %}</p>
