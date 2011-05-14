@@ -264,10 +264,8 @@ SKIP_SOUTH_TESTS = True
 
 TEMPLATE_DEBUG = DEBUG
 TEMPLATE_LOADERS = (
-    ('django.template.loaders.cached.Loader', (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )),
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 )
 TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT, 'templates'),
