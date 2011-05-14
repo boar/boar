@@ -69,9 +69,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware', # first
     'django.middleware.transaction.TransactionMiddleware', # second
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfMiddleware',
     'boar.articles.middleware.ArticleMiddleware', # before cacher
     'boar.cacher.middleware.CachedPageMiddleware',
-    'django.middleware.csrf.CsrfMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'boar.facebook_connect.middleware.FacebookConnectMiddleware', # after auth
@@ -275,6 +275,7 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.csrf',
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
