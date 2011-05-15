@@ -31,6 +31,9 @@ class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'slug', 'created')
     search_fields = ('name',)
+    formfield_overrides = {
+        models.TextField: {'widget': MarkItUpWidget},
+    }
 
 admin.site.unregister(TaggitTag)
 admin.site.register(Tag, TagAdmin)
@@ -128,11 +131,4 @@ class ArticleAdmin(VersionAdmin):
 
 admin.site.register(Article, ArticleAdmin)
 
-
-class TopicMetadataAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {'widget': MarkItUpWidget},
-    }
-
-admin.site.register(TopicMetadata, TopicMetadataAdmin)
 

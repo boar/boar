@@ -52,6 +52,7 @@ class Position(models.Model):
 
 class Tag(TagBase):
     created = models.DateTimeField(editable=False, default=datetime.datetime.now)
+    description = models.TextField(blank=True, null=True, help_text="A description of this tag displayed on the tag page.")
     
     class Meta:
         ordering = ['name']
@@ -84,11 +85,11 @@ class Article(models.Model):
     pub_date = models.DateTimeField(default=datetime.datetime.now)
     approved = models.BooleanField(default=True, editable=False)
     published = models.BooleanField(default=False, help_text="Until published, the article will not be listed on the site.")
-    featured = models.BooleanField(default=False, help_text="Featured articles will be displayed at the top of the section pages and on the home page. An image should almost always be attached.")
+    featured = models.BooleanField(default=False, help_text="Featured articles will be displayed at the top of the section pages and on the home page.")
     tags = TaggableManager(
         through=TaggedArticle,
         blank=True,
-        help_text="In order of specificness/importance. Tags can be separated by commas <i>or</i> spaces, so if you are using a single tag that is comprised of multiple words, surround it with quotes."
+        help_text="Be conservative. Tags should be about the subject of the article, not what is contained inside it. They are used to generate the list of related articles -- they are <em>not</em> search keywords. Specific tags are useful only if you have a specific article you want this article to be related to.<br><br>For example, an article about the Union raising drinks prices may have a quote from the SU president. It should be tagged \"Drinking\" and \"Student's Union\", but not \"President\"."
     )
     authors = models.ManyToManyField(User, blank=True)
     section = models.ForeignKey(Section)
@@ -101,7 +102,6 @@ class Article(models.Model):
         ('musicalbum', 'Music Album Review'),
         ('musiclive', 'Music Live Review'),
         ('podcast', 'Podcast'),
-        #('teteatete', 'Tete-a-tete'),
         ('travel', 'Travel Report'),
         ('url', 'URL'),
     ))
@@ -113,8 +113,8 @@ class Article(models.Model):
         (4, '4'),
         (5, '5'),
     ), help_text="The score given for a review.")
-    page = models.ForeignKey(Page, null=True, blank=True, related_name='articles')
-    notes = models.TextField(help_text="Not displayed anywhere public.", blank=True, null=True)
+    page = models.ForeignKey(Page, null=True, blank=True, related_name='articles', help_text="The page this article is on in the newspaper archive.")
+    notes = models.TextField(help_text="Notes for other editors. Not displayed anywhere public.", blank=True, null=True)
     
     objects = ArticleManager()
     
@@ -132,25 +132,17 @@ class Article(models.Model):
     def get_absolute_url(self):
         if self.tone == 'url':
             return self.body
-        return '/%s/%s/%s/%s/%s/' % (self.section.slug, self.pub_date.year, self.pub_date.strftime("%b").lower(), self.pub_date.day, self.slug)
+        return '/%s/%s/%s/%s/%s/' % (
+            self.section.slug, 
+            self.pub_date.year, 
+            self.pub_date.strftime("%b").lower(), 
+            self.pub_date.day, 
+            self.slug
+        )
 
     def __unicode__(self):
         return self.title
 
-
-class TopicMetadata(models.Model):
-    topic = models.OneToOneField(Tag, related_name='metadata', unique=True)
-    description = models.TextField(blank=True, null=True)
-    image = models.ForeignKey(Image, blank=True, null=True)
-    
-    def get_absolute_url(self):
-        return self.topic.get_absolute_url()
-    
-    def __unicode__(self):
-        return unicode(self.topic)
-    
-    class Meta:
-        verbose_name_plural = 'topic metadata'
 
 
 class Metadata(models.Model):

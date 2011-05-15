@@ -16,10 +16,9 @@
         {% paginate %}
     </div>
     <div class="quarter-column">
-        {% ifequal topics|length 1 %}{% if topics.0.metadata %}{% with topics.0.metadata as m %}<div class="block">
-            {% if m.image %}<img src="{% upload_thumbnail m.image "article-list" %}" alt="{{ m.image }}">{% endif %}
-            {% if m.description %}{{ m.description|markdown|typogrify }}{% endif %}
-        </div>{% endwith %}{% endif %}{% endifequal %}
+        {% if topics|length == 1 and topics.0.description %}<div class="block">
+            {{ topics.0.description|markdown|typogrify }}
+        </div>{% endif %}
         {% if related %}<div class="block">
             <h3>Related</h3>
             <div>{% for topic in related %}{% if not forloop.first %} &middot; {% endif %}<a href="/{{ section.slug }}/{{ topic.slug }}/{% if date %}{{ date|date:"Y" }}/{{ date|date:"b" }}/{% endif %}">{{ topic.name }}</a>{% endfor %}</div>

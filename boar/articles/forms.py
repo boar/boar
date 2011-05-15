@@ -24,15 +24,20 @@ class ArticleAdminModelForm(forms.ModelForm):
             self.initial['pub_date'] =  datetime.datetime(*time.strptime(self.initial['pub_date'], '%Y-%m-%d %H:%M:%S')[:6])
 
 
-    summary = forms.CharField(required=False, widget=forms.Textarea(attrs={'id': 'summary', 'rows': '5', 'cols': '80'}), help_text=Article._meta.get_field('summary').help_text)
-    #body = forms.CharField(widget=forms.Textarea(attrs={'rows': '25', 'cols': '80'}))
-    body = forms.CharField(widget=MarkItUpWidget(), help_text=Article._meta.get_field('body').help_text)
-    #pub_date = forms.DateTimeField()
+    summary = forms.CharField(
+        required=False, 
+        widget=forms.Textarea(attrs={'id': 'summary', 'rows': '5', 'cols': '80'}), 
+        help_text=Article._meta.get_field('summary').help_text
+    )
+    body = forms.CharField(
+        widget=MarkItUpWidget(), 
+        help_text=Article._meta.get_field('body').help_text
+    )
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
         widget=FilteredSelectMultiple('Tags', False), 
         required=False, 
-        help_text="In order of specificness/importance. Tags can be separated by commas <i>or</i> spaces, so if you are using a single tag that is comprised of multiple words, surround it with quotes."
+        help_text=Article._meta.get_field('tags').help_text
     )
     
     class Meta:
@@ -47,4 +52,5 @@ class ArticleArchiveForm(forms.Form):
         self.fields['month'].choices = [(d.strftime('%Y-%b').lower(), d.strftime('%B %Y')) for d in qs.dates('pub_date', 'month')]
     
     month = forms.ChoiceField(choices=[])
+
 
