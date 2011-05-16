@@ -81,7 +81,8 @@ class UserChangeForm(forms.ModelForm):
 class AccountsUserAdmin(UserAdmin):
     change_list_template = "admin/auth/user_change_list.html"
     inlines = [UserProfileInline, FacebookProfileInline]
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_facebook_account')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_facebook_account', 'is_staff', 'is_superuser')
+    list_editable = ('is_staff',)
     actions = ['merge_user_action']
     form = UserChangeForm
     
