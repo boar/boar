@@ -14,4 +14,5 @@ class PositionAdmin(OrderedModelAdmin):
     inlines = [PositionNameInline, PositionMemberInline]
     list_display = ('__unicode__', 'move_up_down_links')
 
-admin.site.register(Position, PositionAdmin)
+#admin.site.register(Position, PositionAdmin)
+
