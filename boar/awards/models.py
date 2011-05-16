@@ -12,6 +12,9 @@ class Ceremony(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        verbose_name_plural = 'ceremonies'
+
 
 class Award(models.Model):
     ceremony = models.ForeignKey(Ceremony, related_name="awards")
@@ -39,3 +42,4 @@ class Vote(models.Model):
     user = models.ForeignKey(User)
     nominee = models.ForeignKey(Nominee)
     date = models.DateTimeField(default=datetime.datetime.now)
+
