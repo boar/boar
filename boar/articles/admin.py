@@ -103,6 +103,7 @@ class ArticleAdmin(VersionAdmin):
     
     def get_tags(self, obj):
         return ', '.join(t.name for t in obj.tags.all())
+    get_tags.short_description = 'Tags'
     
     class Media:
         js = (

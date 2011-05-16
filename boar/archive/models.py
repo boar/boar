@@ -10,6 +10,9 @@ class Volume(OrderedModel):
     title = models.CharField(max_length=100, help_text='For example: "Volume 32" or "1973-1974"')
     slug = models.SlugField()
     
+    class Meta:
+        ordering = ['title']
+
     def __unicode__(self):
         return self.title
 
@@ -24,7 +27,7 @@ class Issue(models.Model):
     objects = IssueManager()
     
     class Meta:
-        ordering = ['volume', '-date']
+        ordering = ['-date']
     
     def get_front_page(self):
         try:
@@ -71,7 +74,12 @@ class Page(models.Model):
     ), editable=False)
     
     class Meta:
-        ordering = ('part', 'number')
+        ordering = (
+            'part__issue__volume', 
+            'part__issue__date', 
+            'part__order', 
+            'number'
+        )
     
     def __unicode__(self):
         return 'Page %s of the %s' % (self.number, self.part)

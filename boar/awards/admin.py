@@ -10,3 +10,4 @@ class AwardAdmin(admin.ModelAdmin):
     inlines = [NomineeInline]
 
 admin.site.register(Award, AwardAdmin)
+
