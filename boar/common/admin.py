@@ -1,9 +1,25 @@
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
+from django.contrib.flatpages.admin import FlatPageAdmin
+from django.contrib.flatpages.models import FlatPage
 from django.contrib.gis.admin.widgets import OpenLayersWidget
 from django.contrib.gis.gdal import OGRGeomType
 from django.contrib.gis.db import models
+from django.contrib.sites.models import Site
+from boar.articles.widgets import MarkItUpWidget
+
+admin.site.unregister(Site)
+
+admin.site.unregister(FlatPage)
+
+class MDFlatPageAdmin(FlatPageAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': MarkItUpWidget},
+    }
+    
+admin.site.register(FlatPage, MDFlatPageAdmin)
+
 
 class LogEntryAdmin(admin.ModelAdmin):
     list_display = ('get_object', 'content_type', 'user', 'action_time', 'action_flag_name', 'change_message')
@@ -22,7 +38,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         return actions[obj.action_flag]
     action_flag_name.short_description = 'Type'
 
-
+admin.site.register(LogEntry, LogEntryAdmin)
 
 class GeoStackedInline(admin.StackedInline):
     """

@@ -2,28 +2,16 @@ from django.conf import settings
 from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.contrib.auth.models import User
-from django.contrib.flatpages.admin import FlatPageAdmin
-from django.contrib.flatpages.models import FlatPage
 from django.db import models
 from django.http import HttpResponse
 
 from boar.articles.feeds import ArticlesFeed, SectionFeed, TopicFeed, UserFeed
 from boar.articles.models import Section, Article
 from boar.articles.views import *
-from boar.articles.widgets import MarkItUpWidget
 from boar.search.views import SearchView
 
 # Admin things
 admin.autodiscover()
-admin.site.root_path = '/admin/' # remove for 1.2
-admin.site.unregister(FlatPage)
-
-class MDFlatPageAdmin(FlatPageAdmin):
-    formfield_overrides = {
-        models.TextField: {'widget': MarkItUpWidget},
-    }
-    
-admin.site.register(FlatPage, MDFlatPageAdmin)
 
 handler500 = 'boar.views.server_error'
 
@@ -98,3 +86,4 @@ if settings.DEBUG:
             {'document_root': settings.MEDIA_ROOT}),
         (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': 'http://media.theboar.org/images/favicon.ico'}),   
     )
+
