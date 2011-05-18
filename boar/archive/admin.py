@@ -55,7 +55,7 @@ admin.site.register(Part, PartAdmin)
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ('number', 'get_part', 'get_issue')
-    list_filter = ('part__name', 'part__issue__title', 'part__issue__volume__title')
+    list_filter = ('part__issue__volume__title', 'part__issue__title', 'part__name')
     ordering = ('-part__issue__date',)
     raw_id_fields = ('part',)
 
