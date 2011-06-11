@@ -19,6 +19,9 @@ SITE_ID = 1
 SECRET_KEY = 'Set me with local_settings.py'
 APPEND_SLASH = True
 
+# Git revision, set in fabfile.py with a local_settings.py file
+GIT_REVISION = 'unknown'
+
 ######################################
 # Apps
 ######################################
@@ -280,6 +283,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'boar.common.context_processors.default_section',
     'boar.facebook_connect.context_processors.facebook_api_key',
     'boar.common.context_processors.google_maps_api_key',
+    'boar.common.context_processors.git_revision',
 )
 
 ######################################

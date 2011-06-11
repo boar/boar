@@ -17,7 +17,8 @@ class GenerateCachedPagesTask(PeriodicTask):
         for url in settings.CACHED_PAGES:
             res = client.get(url+'?magicflag')
             cache_key = 'page:%s' % urllib.quote(url)
-            res.content = force_unicode(res.content).replace('<!--LIVE', '<!--CACHED', 1)
+            # Assuming cache time comment is at top of page
+            res.content = force_unicode(res.content).replace('LIVE', 'CACHED', 1)
             cache.set(cache_key, res.content, 300)
 
 tasks.register(GenerateCachedPagesTask)

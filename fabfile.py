@@ -1,6 +1,7 @@
 from __future__ import with_statement
 from fabric.api import *
 from fabric.contrib.files import exists
+from StringIO import StringIO
 import sys
 import time
 
@@ -117,6 +118,12 @@ def upload_tar_from_git():
         put('%s.tar.gz' % env.version, '%s/packages/' % env.path)
         with cd('releases/%s' % env.version):
             run('tar zxf ../../packages/%s.tar.gz' % env.version)
+            revision = local(
+                'git rev-list HEAD | head -1 | cut -c-20', 
+                capture=True
+            ).strip()
+            fh = StringIO("GIT_REVISION = '%s'" % revision)
+            put(fh, 'boar/configs/local_settings.py')
     local('rm %s.tar.gz' % env.version)
 
 def install_requirements():
