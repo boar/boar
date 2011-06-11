@@ -21,8 +21,8 @@ pysolr==2.0.9
 smartypants==1.6.0.3
 sorl-thumbnail==3.2.5
 South==0.7.3
+django-ordered-model==0.1
 -e git://github.com/mintchaos/django_compressor.git@8f57651#egg=django_compressor
--e git://github.com/bfirsh/django-ordered-model.git@1814f6fee0#egg=django-ordered-model
 -e git://github.com/robhudson/django-debug-toolbar.git@d05dcbb4aa93b1#egg=django-debug-toolbar
 -e git://github.com/toastdriven/django-haystack.git@41814ab4#egg=django-haystack
 -e git://github.com/mintchaos/django_inlines.git@cb22e00d#egg=django_inlines
