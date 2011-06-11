@@ -2,7 +2,7 @@ Hyphenator.config({
     remoteloading: false,
     intermediatestate : 'visible',
     selectorfunction: function () {
-    	return $('p[class!="donthyphenate"]');
+    	return $('.article-column p');
     }
 });
 Hyphenator.run();

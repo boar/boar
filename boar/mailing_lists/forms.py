@@ -27,7 +27,7 @@ class MailingListsWidget(forms.CheckboxSelectMultiple):
  
             cb = forms.CheckboxInput(final_attrs, check_test=lambda value: value in str_values)
             ml = mailing_lists[option_value]
-            output.append(u'<li>%s <div class="label"><label%s>%s</label> <p class="donthyphenate">%s</p></div></li>' % (
+            output.append(u'<li>%s <div class="label"><label%s>%s</label> <p>%s</p></div></li>' % (
                 cb.render(name, force_unicode(option_value)),
                 label_for,
                 conditional_escape(typogrify(ml.name)),

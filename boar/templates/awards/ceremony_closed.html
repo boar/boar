@@ -7,7 +7,7 @@
 <div id="awards">
     <img src="{{ MEDIA_URL }}static/img/boris-crest-big-black.png" alt="">
     <h2>{{ ceremony.title|typogrify }}</h2>
-    <p id="awards-description" class="donthyphenate">Too late – voting closed {{ ceremony.end_date|timesince }} ago. Sorry!</p>
+    <p id="awards-description">Too late – voting closed {{ ceremony.end_date|timesince }} ago. Sorry!</p>
 
 </div>
 {% endblock %}

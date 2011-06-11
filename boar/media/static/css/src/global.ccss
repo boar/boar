@@ -212,10 +212,6 @@ h3.headline, .article-list h3, .article-block h3, .article-block-title h3:
 
 p:
     margin: 0 0 $line_height
-    text-align: justify
-
-p.donthyphenate:
-    text-align: left
 
 .left:
     float: left
@@ -436,6 +432,9 @@ pre, code, tt:
     padding-right: 16px
     margin-right: 16px
     border-right: 1px solid $line_colour
+
+    p:
+        text-align: justify
 
 .articledetails-column:
     float: left
