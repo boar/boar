@@ -6,7 +6,7 @@
 {% block content %}
 <div id="awards">
     <img src="{{ MEDIA_URL }}static/img/boris-crest-big-black.png" alt="">
-    <p id="awards-description">You&rsquo;re awesome. Thanks for voting. Be sure to join us at the <a href="http://www.facebook.com/event.php?eid=127538767283925">awards ceremony</a>!</p>
+    <p id="awards-description">{{ ceremony.thanks_message|markdown|typogrify }}</p>
 
 </div>
 {% endblock %}

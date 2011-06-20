@@ -6,6 +6,7 @@ from django.db import models
 class Ceremony(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    thanks_message = models.TextField(default="You're awesome. Thanks for voting. Be sure to join us at the awards ceremony!", help_text="Message displayed after a vote has been cast.")
     start_date = models.DateTimeField(default=datetime.datetime.now)
     end_date = models.DateTimeField(blank=True, null=True)
 
