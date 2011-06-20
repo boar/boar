@@ -11,6 +11,9 @@
 <meta property="og:site_name" content="The Boar">
 <meta name="description" property="og:description" content="{{ ceremony.description|markdown|typogrify }}">
 {% endblock %}
+{% block extra_js %}{{ block.super }}<script type="text/javascript">
+    boar.refreshOnSessionChange = true;
+</script>{% endblock %}
 {% block content %}
 <div id="awards">
     <img src="{{ MEDIA_URL }}static/img/boris-crest-big-black.png" alt="">
