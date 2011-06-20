@@ -8,6 +8,9 @@ class NomineeInline(admin.TabularInline):
 
 class AwardAdmin(admin.ModelAdmin):
     inlines = [NomineeInline]
+    list_display = ('name', 'ceremony')
+    list_filter = ('ceremony',)
+
 
 admin.site.register(Award, AwardAdmin)
 
