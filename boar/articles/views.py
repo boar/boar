@@ -27,10 +27,14 @@ def home(request):
     # 1 or 3 featured articles
     if len(featured) == 2:
         del(featured[1])
+    try:
+        latest_issue = Volume.objects.order_by('-order')[0].issues.published()[0]
+    except IndexError:
+        latest_issue = None
     return render_to_response('articles/home.html', {
         'featured': featured,
         'news': news.exclude(pk__in=featured_pks), 
-        'latest_issue': Volume.objects.order_by('-order')[0].issues.published()[0],
+        'latest_issue': latest_issue,
     }, context_instance=RequestContext(request))
 
 
