@@ -1,11 +1,10 @@
-from boar.articles.models import Section, Article
+from boar.articles.models import Section, Article, Tag
 from boar.common.views import BaseView
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.utils.datastructures import SortedDict
 from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet, EmptySearchQuerySet
-from tagging.models import Tag
 
 class BaseSearchView(BaseView):
     template = 'search/search.html'
@@ -165,3 +164,4 @@ class SearchView(BaseSearchView):
             facets['selected']['tag'] = tags[tag]
         
         return facets
+
