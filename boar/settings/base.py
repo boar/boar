@@ -1,8 +1,5 @@
-# Django settings for boar project.
-
-import os, django, boar
-DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
-SITE_ROOT = os.path.dirname(os.path.realpath(boar.__file__))
+from unipath import FSPath as Path
+PROJECT_DIR = Path(__file__).absolute().ancestor(2)
 
 ######################################
 # Main
@@ -38,9 +35,10 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     
     'celery',
-    'compressor',
+    #'compressor',
     'debug_toolbar',
     'django_inlines',
     'haystack',
@@ -214,22 +212,23 @@ LANGUAGE_CODE = 'en-gb'
 USE_I18N = False
 
 ######################################
-# Media
+# Media/Static
 ######################################
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_ROOT = PROJECT_DIR.parent.child('media')
 MEDIA_URL = '/media/'
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/admin/'
+STATIC_ROOT = PROJECT_DIR.child('static_root')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    str(PROJECT_DIR.child('static')),
+)
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
 COMPRESS = True
 COMPRESS_CSS_FILTERS = ['boar.common.compress_filters.CleverCSSFilter']
@@ -271,7 +270,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 TEMPLATE_DIRS = (
-    os.path.join(SITE_ROOT, 'templates'),
+    PROJECT_DIR.child('templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

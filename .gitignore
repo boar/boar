@@ -4,11 +4,7 @@
 *.DS_Store
 /boar_ve/
 /boar/settings/*_secret.py
-/boar/media/CACHE/
-/boar/media/cartoons
-/boar/media/uploads
-/boar/media/podcasts
-/boar/media/archive
+/boar/media
 /apache-solr-*
 /pip-log.txt
 *.swp

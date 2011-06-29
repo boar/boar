@@ -13,6 +13,9 @@ python-twitter==0.6
 simplejson
 -f http://typogrify.googlecode.com/files/typogrify-1.0.tar.gz
 typogrify==1.0
+django-redis-cache==0.6.1
+redis==2.4.5
+unipath
 
 # Django pluggables
 celery==1.0.1
