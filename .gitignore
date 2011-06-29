@@ -3,7 +3,7 @@
 *.pyc
 *.DS_Store
 /boar_ve/
-/boar/configs/local_settings.py
+/boar/settings/*_secret.py
 /boar/media/CACHE/
 /boar/media/cartoons
 /boar/media/uploads

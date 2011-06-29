@@ -16,7 +16,7 @@ ROOT_URLCONF = 'boar.urls'
 ######################################
 
 SITE_ID = 1
-SECRET_KEY = 'Set me with local_settings.py'
+SECRET_KEY = 'Set me with base_secret.py'
 APPEND_SLASH = True
 
 # Git revision, set in fabfile.py with a local_settings.py file
@@ -299,8 +299,9 @@ TEST_RUNNER='django.contrib.gis.tests.run_tests'
 
 UPLOAD_DIRECTORY='uploads/%Y/%m/%d'
 
+
 try:
-    from local_settings import *
+    from .base_secret import *
 except ImportError:
     pass
 

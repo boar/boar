@@ -1,5 +1,7 @@
-from boar.configs.staging.settings import *
+from __future__ import absolute_import
 import sys
+
+from .base import *
 
 MEDIA_ROOT = os.path.abspath(os.path.join(SITE_ROOT, '../../../media'))
 
@@ -13,10 +15,10 @@ MEDIA_URL = 'http://media.theboar.org/'
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = 'http://media.theboar.org/admin/'
 
-GOOGLE_MAPS_API_KEY = 'Set me in /etc/boar/local_settings.py'
+GOOGLE_MAPS_API_KEY = 'Set me in live_secret.py'
 
-FACEBOOK_API_KEY = 'Set me in /etc/boar/local_settings.py'
-FACEBOOK_SECRET_KEY = 'Set me in /etc/boar/local_settings.py'
+FACEBOOK_API_KEY = 'Set me in live_secret.py'
+FACEBOOK_SECRET_KEY = 'Set me in live_secret.py'
 
 CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
@@ -24,15 +26,11 @@ CELERY_BACKEND = 'cache'
 BROKER_HOST = 'localhost'
 BROKER_PORT = 5672
 BROKER_USER = 'boar'
-BROKER_PASSWORD = 'Set me in /etc/boar/local_settings.py'
+BROKER_PASSWORD = 'Set me in local.py'
 BROKER_VHOST = 'boar'
 CELERYBEAT_SCHEDULE_FILENAME = os.path.abspath(os.path.join(SITE_ROOT, '../../../celery/celerybeat-schedule'))
 
 HAYSTACK_SOLR_URL = 'http://127.0.0.1:8180/solr'
 
-sys.path.append('/etc/boar')
-try:
-    from local_settings import *
-except ImportError:
-    pass
+from .live_secret import *
 
