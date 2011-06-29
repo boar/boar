@@ -1,7 +1,7 @@
 import datetime
 import urllib
 
-from celery.task import tasks, PeriodicTask
+from celery.task import PeriodicTask
 
 from django.conf import settings
 from django.core.cache import cache
@@ -21,4 +21,3 @@ class GenerateCachedPagesTask(PeriodicTask):
             res.content = force_unicode(res.content).replace('LIVE', 'CACHED', 1)
             cache.set(cache_key, res.content, 300)
 
-tasks.register(GenerateCachedPagesTask)

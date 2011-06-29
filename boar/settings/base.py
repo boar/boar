@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'compressor',
     'debug_toolbar',
     'django_inlines',
+    'djcelery',
     'haystack',
     'pagination',
     'reversion',
@@ -306,9 +307,12 @@ TEST_RUNNER = 'django.contrib.gis.tests.run_tests'
 
 UPLOAD_DIRECTORY='uploads/%Y/%m/%d'
 
-
 try:
     from .base_secret import *
 except ImportError:
     pass
+
+import djcelery
+djcelery.setup_loader()
+
 

@@ -1,0 +1,7 @@
+# 
+# /etc/locales.gen
+#
+# managed by puppet
+#
+en_GB.UTF-8 UTF-8
+

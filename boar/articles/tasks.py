@@ -1,4 +1,4 @@
-from celery.task import Task, tasks
+from celery.task import Task
 import datetime
 
 from boar.articles.models import Hit
@@ -15,5 +15,4 @@ class HitTask(Task):
             qs = qs.filter(user=user)
         if qs.count() == 0:
             return Hit.objects.create(article=article, date=date, user=user, ip_address=ip_address)
-        
-tasks.register(HitTask)
+

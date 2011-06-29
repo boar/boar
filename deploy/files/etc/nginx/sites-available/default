@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    listen   [::]:80 default ipv6only=on;
+
+    access_log /var/log/nginx/theboar.org.access.log;
+    error_log /var/log/nginx/theboar.org.error.log;
+
+    location /static/ {
+        alias /var/www/theboar.org/releases/current/boar/static_root/;
+    }
+    
+    location /media/ {
+        alias /var/www/theboar.org/media/;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+    }
+}
+
