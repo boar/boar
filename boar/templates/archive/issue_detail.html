@@ -6,7 +6,7 @@
 <meta property="og:title" content="{{ issue }}">
 <meta property="og:type" content="newspaper">
 <meta property="og:url" content="http://{{ request.get_host }}{{ issue.get_absolute_url }}">
-<meta property="og:image" content="{% with issue.get_front_page.image as front_page %}{% if front_page %}{% thumbnail front_page 219x10000 %}{% else %}{{ MEDIA_URL}}static/img/boar-head.png{% endif %}{% endwith %}">
+<meta property="og:image" content="{% with issue.get_front_page.image as front_page %}{% if front_page %}{% thumbnail front_page 219x10000 %}{% else %}{{ STATIC_URL }}img/boar-head.png{% endif %}{% endwith %}">
 <meta property="og:site_name" content="The Boar">
 
 

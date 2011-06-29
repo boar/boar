@@ -1,1 +1,1 @@
-{% if stars %}<li class="rating" title="{{ score }}">{% for star in stars %}<img src="{{ MEDIA_URL }}static/img/star-{% if star %}filled{% else %}empty{% endif %}.2.png" alt="{% if star %}*{% endif %}">{% endfor %}</li>{% endif %}
+{% if stars %}<li class="rating" title="{{ score }}">{% for star in stars %}<img src="{{ STATIC_URL }}img/star-{% if star %}filled{% else %}empty{% endif %}.2.png" alt="{% if star %}*{% endif %}">{% endfor %}</li>{% endif %}

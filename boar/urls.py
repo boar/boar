@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.db import models
 from django.http import HttpResponse
 
@@ -80,6 +81,7 @@ urlpatterns = patterns('',
 )
 
 if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
     urlpatterns += patterns('', 
         (r'^media/(?P<path>.*)$', 
             'django.views.static.serve',

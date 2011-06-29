@@ -8,7 +8,7 @@ Hyphenator.config({
 Hyphenator.run();
 
 $.fn.spinnyThing = function() {
-    this.html('<img src="'+boar.MEDIA_URL+'static/img/ajax-loader.gif" />');
+    this.html('<img src="'+boar.STATIC_URL+'img/ajax-loader.gif" />');
 }
 
 $(function() {
@@ -73,7 +73,7 @@ $(function() {
                 $.getJSON('/accounts/user-data/', function(data) {
                     if (data.user) {
                         userBar.html(
-                            '<li><a href="/users/'+data.user.username+'/"><img src="'+boar.MEDIA_URL+'static/img/facebook-icon.png" alt="Logged in with Facebook" width="18" height="18" /></a></li>'+
+                            '<li><a href="/users/'+data.user.username+'/"><img src="'+boar.STATIC_URL+'img/facebook-icon.png" alt="Logged in with Facebook" width="18" height="18" /></a></li>'+
                             '<li><a href="/users/'+data.user.username+'/">'+data.user.first_name+' '+data.user.last_name+'</a></li>'
                         );
                     }
@@ -82,7 +82,7 @@ $(function() {
                     else {
                         FB.api('/me', function(response) {
                             userBar.html(
-                                '<li><img src="'+boar.MEDIA_URL+'static/img/facebook-icon.png" alt="Logged in with Facebook" width="18" height="18" /></li>'+
+                                '<li><img src="'+boar.STATIC_URL+'img/facebook-icon.png" alt="Logged in with Facebook" width="18" height="18" /></li>'+
                                 '<li>'+response.name+'</li>'
                             );
                         });

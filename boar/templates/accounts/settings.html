@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load compress %}
 {% block extra_js %}{{ block.super }}{% compress js %}
-<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}static/js/src/urlify.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}static/js/src/forms.js"></script>{% endcompress %}
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/src/urlify.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/src/forms.js"></script>{% endcompress %}
 <script type="text/javascript">
     boar.refreshOnSessionChange = true;
 </script>

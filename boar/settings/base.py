@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     
     'celery',
-    #'compressor',
+    'compressor',
     'debug_toolbar',
     'django_inlines',
     'haystack',
@@ -228,11 +228,18 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
-COMPRESS = True
-COMPRESS_CSS_FILTERS = ['boar.common.compress_filters.CleverCSSFilter']
-COMPRESS_JS_FILTERS = []
+COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = [
+    'boar.common.compress_filters.CleverCSSFilter',
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.csstidy.CSSTidyFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
+]
 
 ######################################
 # Search
@@ -279,6 +286,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
+    "django.core.context_processors.static",
     'boar.common.context_processors.default_section',
     'boar.facebook_connect.context_processors.facebook_api_key',
     'boar.common.context_processors.google_maps_api_key',
@@ -289,7 +297,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Tests
 ######################################
 
-TEST_RUNNER='django.contrib.gis.tests.run_tests'
+TEST_RUNNER = 'django.contrib.gis.tests.run_tests'
 
 
 ######################################

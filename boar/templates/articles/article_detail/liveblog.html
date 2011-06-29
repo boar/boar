@@ -4,8 +4,8 @@
 {% load markup %}
 {% load typogrify %}
 {% block extra_js %}{{ block.super }}
-<script type="text/javascript" src="{{ MEDIA_URL}}static/js/twitterlib.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL}}static/js/jquery.timeago.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/twitterlib.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.timeago.js"></script>
 <script type="text/javascript">
     $(function() {
         var since_id = {{ article.liveblog_metadata.since_tweet_id|default:"1" }};

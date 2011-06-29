@@ -1,8 +1,8 @@
 {% extends "articles/article_detail/article.html" %}
 {% block extra_js %}{{ block.super }}
-{% if article.podcast_metadata %}<script type="text/javascript" src="{{ MEDIA_URL }}static/js/audio-player.js"></script>  
+{% if article.podcast_metadata %}<script type="text/javascript" src="{{ STATIC_URL }}js/audio-player.js"></script>  
 <script type="text/javascript">  
-    AudioPlayer.setup("{{ MEDIA_URL }}static/flash/player.swf", {  
+    AudioPlayer.setup("{{ STATIC_URL }}flash/player.swf", {  
         width: 417,
         animation: "no"
     });  

@@ -5,6 +5,7 @@
 /boar_ve/
 /boar/settings/*_secret.py
 /boar/media
+/boar/static_root
 /apache-solr-*
 /pip-log.txt
 *.swp
