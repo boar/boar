@@ -27,6 +27,13 @@ exec { "/usr/sbin/locale-gen":
     require => [Package[locales], File["/etc/locale.gen"]],
 }
 
+file {
+    "/etc/bash.bashrc":
+        content => template("files/etc/bash.bashrc"),
+        owner => "root",
+        group => "root",
+        mode => 644;
+}
 
 # Packages for Boar site
 package {
