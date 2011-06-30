@@ -31,5 +31,6 @@ https://github.com/HonzaKral/django-threadedcomments/tarball/25b282359409ef672ed
 django-taggit==0.9.3
 
 gunicorn==0.12.2
+eventlet
 Fabric
 
