@@ -73,9 +73,18 @@ def deploy():
         run('ln -s %s releases/current' % version_path())
 
     sudo('cp %s/solr/conf/schema.xml /etc/solr/conf/schema.xml' % version_path())
+    
+    restart()
 
+def restart():
     sudo('/etc/init.d/supervisor stop')
-    sudo('/etc/init.d/supervisor start')
+    env.warn_only = True
+    while True:
+        out = sudo('/etc/init.d/supervisor start')
+        if not out.failed:
+            break
+        time.sleep(1)
+    env.warn_only = False
     sudo('/etc/init.d/nginx reload')
     sudo('/etc/init.d/jetty force-reload')
 
