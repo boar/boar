@@ -27,5 +27,7 @@ CELERYBEAT_SCHEDULE_FILENAME = '/var/www/theboar.org/celery/celerybeat-schedule'
 
 HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'
 
+GIT_REVISION = '%(GIT_REVISION)s'
+
 from .live_secret import *
 

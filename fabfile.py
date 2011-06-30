@@ -1,5 +1,5 @@
 from fabric.api import *
-from fabric.contrib.files import exists
+from fabric.contrib.files import exists, upload_template
 from fabric.contrib.project import rsync_project
 import time
 
@@ -50,9 +50,18 @@ def deploy():
             delete=True,
             extra_opts='--exclude=static_root --exclude=".git*" --exclude="*.pyc" --exclude="apache-solr-*" --exclude="*.pyc" --exclude="*~" --exclude="._*" --exclude="boar/media" --exclude=".*.swp" --exclude=".DS_Store"'
         )
-        sudo('chown -R www-data:www-data "%s"' % version_path())
     
     with cd(version_path()):
+        revision = local(
+            'git rev-list HEAD | head -1 | cut -c-20', 
+            capture=True
+        ).strip()
+
+        upload_template('boar/settings/live.py', 'boar/settings/live.py', {
+            'GIT_REVISION': revision
+        })
+
+        sudo('chown -R www-data:www-data .')
         with cd('deploy'):
             sudo('puppet --templatedir=. deps.pp')
         
