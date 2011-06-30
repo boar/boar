@@ -335,7 +335,7 @@ pre, code, tt:
             height: 24px
             text-indent: -9999px
             border: 0
-            background: #000 url('http://media.theboar.org/static/img/search-button.2.png') no-repeat
+            background: #000 url('/static/img/search-button.2.png') no-repeat
             // Fixes iphone
             font-size: 1px
 
@@ -499,7 +499,7 @@ pre, code, tt:
                 color: $small_colour
             a.selected:
                 color: black
-                background: url('http://media.theboar.org/static/img/filter-arrow.png') no-repeat center left
+                background: url('/static/img/filter-arrow.png') no-repeat center left
                 padding-left: 10px
 
 .article-list, .link-list:
@@ -548,7 +548,7 @@ pre, code, tt:
     display: block
 
 #footer-wrapper:
-    background: url('http://media.theboar.org/static/img/footer-fade.4.png') no-repeat top center
+    background: url('/static/img/footer-fade.4.png') no-repeat top center
 
 #footer:
     width: $page_width
