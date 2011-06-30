@@ -135,6 +135,7 @@ CACHED_BITS = {
 
 CELERYD_CONCURRENCY = 5
 CELERY_ALWAYS_EAGER = True
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 ######################################
 # Comments
