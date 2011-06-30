@@ -1,4 +1,5 @@
 from boar.archive.managers import IssueManager
+from boar.archive.tasks import generate_page_image
 import datetime
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -92,12 +93,8 @@ class Page(models.Model):
         )
     
     def save(self, *args, **kwargs):
-        # Ensure the PDF is on disk
         super(Page, self).save(*args, **kwargs)
-        
-        if not subprocess.call(['convert', '-density', '300', unicode(self.pdf.path), '-colorspace', 'RGB', unicode(re.sub(r'\.pdf$', '.jpg', self.pdf.path))]):
-            self.image = re.sub(r'\.pdf$', '.jpg', unicode(self.pdf))
-            super(Page, self).save(*args, **kwargs)
+        generate_page_image.delay(self.id)
         
     
 
