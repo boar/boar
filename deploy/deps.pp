@@ -187,6 +187,9 @@ file {
     "/etc/nginx/sites-available/default":
         content => template("files/etc/nginx/sites-available/default"),
         require => Package[nginx];
+    "/etc/nginx/nginx.conf":
+        content => template("files/etc/nginx/nginx.conf"),
+        require => Package[nginx];
 }
 
 service { "nginx":
