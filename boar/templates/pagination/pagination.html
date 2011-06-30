@@ -2,7 +2,7 @@
 {% load i18n %}
 <div class="pagination">
     {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}" class="prev">&laquo; {% trans "previous" %}</a>
+        <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}" class="prev" rel="prev">&laquo; {% trans "previous" %}</a>
     {% else %}
         <span class="disabled prev">&laquo; {% trans "previous" %}</span>
     {% endif %}
@@ -18,7 +18,7 @@
         {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}{{ getvars }}" class="next">{% trans "next" %} &raquo;</a>
+        <a href="?page={{ page_obj.next_page_number }}{{ getvars }}" class="next" rel="next">{% trans "next" %} &raquo;</a>
     {% else %}
         <span class="disabled next">{% trans "next" %} &raquo;</span>
     {% endif %}
