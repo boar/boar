@@ -107,8 +107,8 @@ class ArticleAdmin(VersionAdmin):
     
     class Media:
         js = (
-            'static/js/src/jquery-1.3.2.min.js',
-            'static/js/article-admin.js',
+            'js/src/jquery-1.3.2.min.js',
+            'js/article-admin.js',
         )
     
     # Fill in bits of information when using "save and add another"

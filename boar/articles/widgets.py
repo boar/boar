@@ -6,15 +6,15 @@ class MarkItUpWidget(forms.Textarea):
     
     class Media:
         js = (
-            'static/js/src/jquery-1.3.2.min.js',
-            'static/js/markitup/jquery.markitup.pack.js',
-            'static/js/markitup/sets/markdown/set.js',
-            'static/js/admin_markitup.js',
+            'js/src/jquery-1.3.2.min.js',
+            'js/markitup/jquery.markitup.pack.js',
+            'js/markitup/sets/markdown/set.js',
+            'js/admin_markitup.js',
         )
         css = {
             'screen': (
-                'static/js/markitup/skins/simple/style.css',
-                'static/js/markitup/sets/markdown/style.css',
+                'js/markitup/skins/simple/style.css',
+                'js/markitup/sets/markdown/style.css',
             )
         }
 

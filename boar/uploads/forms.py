@@ -8,6 +8,6 @@ class ThumbInlineForm(forms.ModelForm):
         
     class Media:
         js = (
-            'static/js/src/jquery-1.3.2.min.js',
-            'static/js/jquery.imgareaselect-0.6.2.min.js',
+            'js/src/jquery-1.3.2.min.js',
+            'js/jquery.imgareaselect-0.6.2.min.js',
         )
