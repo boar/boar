@@ -69,7 +69,7 @@ def deploy():
             run('rm -rf ve')
         run('mkdir ve')
         run('virtualenv ve')
-        run('pip install --upgrade -E ve -r requirements.txt')
+        run('pip install --upgrade -E ve -r requirements.txt', shell=True)
 
     manage('collectstatic --noinput')
     manage('compress')
