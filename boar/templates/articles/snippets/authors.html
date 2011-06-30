@@ -1,1 +1,1 @@
-{% for author in authors %}<a href="{{ author.get_absolute_url }}">{{ author.get_full_name }}</a>{% if forloop.last %}{% else %}{% ifequal forloop.revcounter0 1 %} and {% else %}, {% endifequal %}{% endif %}{% endfor %}
+{% for author in authors %}<a href="{{ author.get_absolute_url }}" rel="author">{{ author.get_full_name }}</a>{% if forloop.last %}{% else %}{% ifequal forloop.revcounter0 1 %} and {% else %}, {% endifequal %}{% endif %}{% endfor %}
