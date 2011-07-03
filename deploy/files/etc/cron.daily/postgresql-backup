@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -f /var/lib/postgresql/boar.dmp ]; then
+    mv /var/lib/postgresql/boar{,-old}.dmp
+fi
+
+sudo -u postgres pg_dump boar -Fc -O -f /var/lib/postgresql/boar.dmp
+
