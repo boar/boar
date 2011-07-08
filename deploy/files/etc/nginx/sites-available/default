@@ -3,8 +3,15 @@ upstream app_server {
 }
 
 server {
+    server_name  www.theboar.org;
+    rewrite ^(.*) http://theboar.org$1 permanent;
+}
+
+server {
     listen 80;
     listen   [::]:80 default ipv6only=on;
+
+    server_name theboar.org
 
     access_log /var/log/nginx/theboar.org.access.log;
     error_log /var/log/nginx/theboar.org.error.log;
