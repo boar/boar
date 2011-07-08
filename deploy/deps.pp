@@ -36,8 +36,8 @@ file {
 }
 
 file {
-    "/etc/cron.d/postgresql-backup":
-        content => template("files/etc/cron.d/postgresql-backup"),
+    "/etc/cron.daily/postgresql-backup":
+        content => template("files/etc/cron.daily/postgresql-backup"),
         owner => "root",
         group => "root",
         mode => 755;
