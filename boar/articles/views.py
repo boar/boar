@@ -373,4 +373,7 @@ class TravelSectionView(SectionView):
     def get_featured(self, articles):
         return list(articles.filter(featured=True).exclude(image=None)[0:1])
 
+class SportSectionView(SectionView):
+    slug = 'sport'
+    section_template = 'articles/sections/sport.html'
 

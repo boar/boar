@@ -18,7 +18,7 @@ readme.
 
 To install dependencies in Debian or Ubuntu, run:
 
-    $ sudo apt-get install csstidy python-cairo python-cjson python-imaging python-psycopg2 libgeos-3.0.0 proj postgis gdal-bin postgresql-8.3-postgis
+    $ sudo apt-get install csstidy python-cairo python-cjson python-imaging python-psycopg2 libgeos-3.2.0 proj postgis gdal-bin postgresql-8.4-postgis
     $ sudo easy_install pip
 
 Either in a virtualenv, or as root if you really have to:
@@ -32,8 +32,8 @@ Create a PostGIS template database:
     $ sudo su - postgres
     $ createdb -E UTF8 template_postgis
     $ createlang -d template_postgis plpgsql
-    $ psql -d template_postgis -f /usr/share/postgresql-8.3-postgis/lwpostgis.sql
-    $ psql -d template_postgis -f /usr/share/postgresql-8.3-postgis/spatial_ref_sys.sql
+    $ psql -d template_postgis -f /usr/share/postgresql/8.4/contrib/postgis-1.5/postgis.sql
+    $ psql -d template_postgis -f /usr/share/postgresql/8.4/contrib/postgis-1.5/spatial_ref_sys.sql
 
 Open a shell in the template:
 

@@ -72,7 +72,7 @@ urlpatterns = patterns('',
     (r'^music/', include(MusicSectionView().urls)),
     (r'^news/', include(NewsSectionView().urls)),
     (r'^science/', include(SectionView(slug='science').urls)),
-    (r'^sport/', include(SectionView(slug='sport').urls)),
+    (r'^sport/', include(SportSectionView().urls)),
     (r'^travel/', include(TravelSectionView().urls)),
     (r'^tv/', include(SectionView(slug='tv').urls)),
     

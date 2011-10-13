@@ -1248,3 +1248,9 @@ input.label:
     width: 260px
     margin-left: 190px
     display: none
+
+.banner:
+	height: 55px;
+	img:
+		display: block
+		float: right

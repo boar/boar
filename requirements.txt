@@ -2,7 +2,7 @@
 python-dateutil<2.0
 BeautifulSoup
 Django==1.3
-https://github.com/tymofij/clevercss/tarball/19673ad
+#https://github.com/tymofij/clevercss/tarball/19673ad
 feedparser==4.1
 Markdown==2.0.3
 https://github.com/facebook/python-sdk/tarball/ad63a5889783f3c581d2a0c0d5d49613065af100
