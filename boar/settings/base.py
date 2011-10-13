@@ -235,7 +235,6 @@ STATICFILES_FINDERS = (
 
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = [
-    'boar.common.compress_filters.CleverCSSFilter',
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.csstidy.CSSTidyFilter',
 ]
