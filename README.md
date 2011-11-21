@@ -49,18 +49,9 @@ Create a database, replacing ``username`` with your system user:
     $ sudo su postgres
     $ createdb -T template_postgis -O username boar
 
-Run these commands to set up your database and create the superuser:
+To get started, you'll need a database dump from the live server:
 
-    $ cd boar/
-    $ ./manage.py syncdb
-    $ ./manage.py migrate
-
-You may need to rerun these commands if there are future database changes.
-
-Initially, you'll need a bit of data to get you started:
-
-    $ cd boar/
-    $ ./manage.py loaddata example_data
+    $ ssh root@theboar.org "pg_dump boar | bzip2" | bunzip2 | psql boar
 
 
 ### Installing Solr
@@ -94,4 +85,11 @@ With the Solr server also running:
     $ cd boar/
     $ ./manage.py runserver
 
+
+Deploying to production
+-----------------------
+
+    $ fab deploy
+
+That's it.
 
