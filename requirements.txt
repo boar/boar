@@ -4,7 +4,7 @@ BeautifulSoup
 Django==1.3
 feedparser==4.1
 Markdown==2.0.3
-https://github.com/facebook/python-sdk/tarball/ad63a5889783f3c581d2a0c0d5d49613065af100
+https://github.com/pythonforfacebook/facebook-sdk/tarball/797d067dec8d5a2c19714b705953b52505611fba
 simplejson
 http://typogrify.googlecode.com/files/typogrify-1.0.tar.gz
 django-redis-cache==0.6.1

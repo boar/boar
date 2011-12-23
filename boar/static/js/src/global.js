@@ -43,15 +43,15 @@ $(function() {
     comments.find('.comment-form').submit(function() {
         var form = this;
         FB.getLoginStatus(function(response) {
-            if (response.session) {
+            if (response.authResponse) {
                 form.submit();
             }
             else {
                 FB.login(function(response) {
-                    if (response.session) {
+                    if (response.authResponse) {
                         form.submit();
                     }
-                }, {'perms': 'email'});
+                }, {'scope': 'email'});
             }
         });
         return false;
@@ -66,10 +66,11 @@ $(function() {
             appId: boar.facebookAppId,
             status: true,
             cookie: true,
-            xfbml: true
+            xfbml: true,
+            oauth: true
         });
         var updateUserBar = function(response) {
-            if (response.session) {
+            if (response.authResponse) {
                 $.getJSON('/accounts/user-data/', function(data) {
                     if (data.user) {
                         userBar.html(
@@ -101,11 +102,11 @@ $(function() {
                 });
             }
             else {
-                userBar.html('<fb:login-button perms="email" length="long"></fb:login-button>');
+                userBar.html('<fb:login-button scope="email" length="long"></fb:login-button>');
                 FB.XFBML.parse(userBar[0]);
             }
         }
-        FB.Event.subscribe('auth.sessionChange', function(response) {
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
             if (boar.refreshOnSessionChange) {
                 window.location = window.location;
                 return;
@@ -130,4 +131,5 @@ $(function() {
 
     
 });
+
 
