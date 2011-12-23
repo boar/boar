@@ -51,7 +51,7 @@ Create a database, replacing ``username`` with your system user:
 
 To get started, you'll need a database dump from the live server:
 
-    $ ssh root@theboar.org "pg_dump boar | bzip2" | bunzip2 | psql boar
+    $ ssh root@theboar.org "sudo -u postgres pg_dump boar | bzip2" | bunzip2 | psql boar
 
 
 ### Installing Solr
