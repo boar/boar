@@ -20,14 +20,26 @@
         {% if not forloop.first %}<h3>{{ part.part.name }}</h3>{% endif %}
     
         {% for spread in part.spreads %}{% if spread.pages %}<div class="spread clearfix">
-            <div class="pages content-column border">{% for page in spread.pages %}<a href="{{ page.pdf.url }}"><img src="{% thumbnail page.image 298x10000 %}" alt="{{ page.title }}" width="298" id="archive-page-{{ part.part.pk }}-{{ page.pk }}" class="{% if forloop.last %}last{% endif %}"></a>{% endfor %}
+	<div class="block-column">
+                <h3>
+			{% if spread.pages|length == 1 %}Page {{ spread.pages.0.number }}{% else %}Pages {{ spread.pages.0.number }}&ndash;{% with spread.pages|slice:"-1:" as last_page %}{{ last_page.0.number }}{% endwith %}{% endif %}
+		</h3>
+                <ul>
+			{% for content in spread.content %}
+          		<li>
+				{% with content.get_absolute_url as content_url %}{% if content_url %}
+				<a href="{{ content_url }}">
+					{% endif %}{{ content|typogrify }}{% if content_url %}
+				</a>
+				{% endif %}{% endwith %}
+			</li>
+                	{% endfor %}
+		</ul>
+    	</div>            
+	<div class="pages content-column border">
+{% for page in spread.pages %}<a href="{{ page.pdf.url }}"><img src="{% thumbnail page.image 298x10000 %}" alt="{{ page.title }}" width="298" id="archive-page-{{ part.part.pk }}-{{ page.pk }}" class="{% if forloop.last %}last{% endif %}"></a>{% endfor %}
             </div>
-            <div class="block-column">
-                <h3>{% if spread.pages|length == 1 %}Page {{ spread.pages.0.number }}{% else %}Pages {{ spread.pages.0.number }}&ndash;{% with spread.pages|slice:"-1:" as last_page %}{{ last_page.0.number }}{% endwith %}{% endif %}</h3>
-                <ul>{% for content in spread.content %}
-                    <li>{% with content.get_absolute_url as content_url %}{% if content_url %}<a href="{{ content_url }}">{% endif %}{{ content|typogrify }}{% if content_url %}</a>{% endif %}{% endwith %}</li>
-                {% endfor %}</ul>
-            </div>
+            
         </div>{% endif %}{% endfor %}
 
     {% endfor %}
