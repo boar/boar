@@ -31,3 +31,4 @@ GIT_REVISION = '%(GIT_REVISION)s'
 
 from .live_secret import *
 
+EMAIL_HOST = "mail-relay.warwick.ac.uk"
