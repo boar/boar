@@ -14,7 +14,7 @@ class FacebookConnectMiddleware(object):
 		fb_user = facebook.get_user_from_cookie(
 		    request.COOKIES,
 		    settings.FACEBOOK_API_KEY,
-		    settings.FACEBOOK_SECRET_KEY,
+		    settings.FACEBOOK_SECRET_KEY
 		)
 		if fb_user:
 		    if request.user.is_authenticated():
@@ -73,7 +73,7 @@ class FacebookConnectMiddleware(object):
 		            # Logged into an account with a facebook profile but with 
 		            # no facebook session
 		            logout(request)
-	except facebook.GraphAPIError, e:
-		# fail
+	except (facebook.GraphAPIError, IOError):
+		# If anything goes uncaught - logout.
 		logout(request)	
     
