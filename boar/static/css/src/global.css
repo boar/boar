@@ -1808,3 +1808,27 @@ input.label {
   display: block;
   float: right;
 }
+
+.home-banner {
+  color: #000000;
+  background-color: #D0D0D0;
+  border-color: #A6A6A6;
+  text-align: center;
+  padding:7px;
+  border:2px solid gray;
+}
+
+.news-banner {
+  color: #FFFFFF;
+  background-color: #B81B15;
+  border-color: #A6A6A6;
+  text-align: center;
+  padding:7px;
+  border:2px solid darkred;
+}
+
+#news-banner a:link {
+color: #000000;
+text-decoration: none;
+}
+

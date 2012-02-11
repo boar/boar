@@ -312,6 +312,11 @@ try:
 except ImportError:
     pass
 
+
+#using python -m smtpd -n -c DebuggingServer localhost:1025 to produce a mail server
+#EMAIL_HOST = 'localhost'
+#EMAIL_PORT = '1025'
+
 import djcelery
 djcelery.setup_loader()
 

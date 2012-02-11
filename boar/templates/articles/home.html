@@ -14,6 +14,8 @@
 <meta name="description" property="og:description" content="The University of Warwick students&rsquo; newspaper, published fortnightly on Tuesday.">
 {% endblock %}
 {% block content %}
+<div class="home-banner">Snapped some awesome scenes around campus? Let the Boar show them off by sending your pictures to <a href="mailto:contact@theboar.org?Subject=Campus%20shots">
+contact@theboar.org</a>!</div><br/>
 <div class="content-column border">
     {% with featured.0 as a %}<div class="article-block-big">
         <h2><a href="{{ featured.0.get_absolute_url }}">{{ featured.0.title|typogrify }}</a></h2>
@@ -61,6 +63,36 @@
   {% section_block "arts" %}
 </div>
 <div class="blockplusone-column">
+<!-- This is the code for twitter feed -->
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 4,
+  interval: 30000,
+  width: 'auto',
+  height: 300,
+  theme: {
+    shell: {
+      background: '#D0D0D0',
+      color: '#000000'
+    },
+    tweets: {
+      background: '#d0d0d0',
+      color: '#000000',
+      links: '#007bff'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: false,
+    behavior: 'default'
+  }
+}).render().setUser('warwickboar').start();
+</script>
+<!-- Twitter ends here -->
   {% if latest_issue %}<div class="block archive-block">
     <h3><a href="{% url archive %}">Newspaper</a></h3>
     <a href="{{ latest_issue.get_absolute_url }}"><img src="{% thumbnail latest_issue.get_front_page.image 250x10000 %}" alt="{{ issue.title }}" width="250"></a>

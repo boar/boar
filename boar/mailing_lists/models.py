@@ -58,4 +58,3 @@ class Mailing(models.Model):
                     [user.email],
                 ))
             send_mass_mail(datatuple=tuple(data), fail_silently=False)
-

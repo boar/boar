@@ -75,9 +75,10 @@ urlpatterns = patterns('',
     (r'^sport/', include(SportSectionView().urls)),
     (r'^travel/', include(TravelSectionView().urls)),
     (r'^tv/', include(SectionView(slug='tv').urls)),
-    
+
     url('^(?P<prefix>%s)/(?P<tiny>\w+)$' % '|'.join(settings.SHORTEN_MODELS.keys()), 'shorturls.views.redirect'),
     url(r'^google875fd42759aaabd6.html$', lambda x: HttpResponse()),
+    url(r'^admin/', include(admin.site.urls)),
 )
 
 if settings.DEBUG:

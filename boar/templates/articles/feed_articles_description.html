@@ -1,1 +1,22 @@
-{% load inlines %}{% load typogrify %}{% load markup %}{% if obj.image %}{% load uploads %}<p><img src="{% upload_thumbnail obj.image "main" %}" alt="{{ obj.image }}">{% if obj.image.caption or obj.image.author %}<br>&raquo; {{ obj.image.caption }}{% if obj.image.author %} <small>photo: {{ obj.image.author.get_full_name }}</small>{% endif %}{% endif %}</p>{% endif %}{% process_inlines obj.body as body %}{{ body|markdown|smartypants }}
+{% load inlines %}
+{% load typogrify %}
+{% load markup %}
+
+{% if obj.image %}
+	{% load uploads %}
+	<p>
+		<img src="{% upload_thumbnail obj.image "main" %}" alt="{{ obj.image }}">
+		{% if obj.image.caption or obj.image.author %}
+			<br>&raquo; 
+			{{ obj.image.caption }}
+			{% if obj.image.author %} 
+				<small>photo: 
+					{{ obj.image.author.get_full_name }}
+				</small>
+			{% endif %}
+		{% endif %}
+	</p>
+{% endif %}
+
+{% process_inlines obj.body as body %}
+{{ body|markdown|smartypants }}

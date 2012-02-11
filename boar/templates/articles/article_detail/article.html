@@ -31,7 +31,13 @@
          {% block article-column %}{% block article-authors %}{% with article.authors.all as authors %}{% if authors %}<div class="article-metadata">{% include "articles/snippets/authors.html" %}</div>{% endif %}{% endwith %}{% endblock %}
         {% block article-body %}{% process_inlines article.body as body %}{{ body|markdown|typogrify }}{% endblock %}{% endblock %}
         {% if article.page %}<p><small>Published on <a href="{{ article.page.get_absolute_url }}">page {{ article.page.number }}</a> of the <a href="{{ article.page.part.issue.get_absolute_url }}">{{ article.page.part }}</a>.</small></p>{% endif %}
-        <fb:like show_faces="true" width="417"></fb:like>
+<fb:like show_faces="true" width="417"></fb:like>
+
+<!-- This is the twitter 'tweet' button -->
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<!-- Ends here -->
+
     </div>
     <div class="articledetails-column">
        {% block articledetails %}{% if topics %}<div class="block">
