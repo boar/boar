@@ -5,6 +5,7 @@ from django.core.mail import send_mass_mail
 from django.core.urlresolvers import reverse
 from django.db import models
 from ordered_model.models import OrderedModel
+from smtplib import SMTPRecipientsRefused
 
 class MailingList(OrderedModel):
     name = models.CharField(max_length=255)
@@ -57,4 +58,10 @@ class Mailing(models.Model):
                     self.mailing_list.from_email,
                     [user.email],
                 ))
-            send_mass_mail(datatuple=tuple(data), fail_silently=False)
+		try:
+			send_mass_mail(datatuple=tuple(data), fail_silently=False)
+		except SMTPRecipientsRefused:
+			continue
+		data = []
+
+

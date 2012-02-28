@@ -1814,7 +1814,7 @@ input.label {
   background-color: #D0D0D0;
   border-color: #A6A6A6;
   text-align: center;
-  padding:7px;
+  padding:3px;
   border:2px solid gray;
 }
 
@@ -1823,8 +1823,8 @@ input.label {
   background-color: #B81B15;
   border-color: #A6A6A6;
   text-align: center;
-  padding:7px;
-  border:2px solid darkred;
+  padding:3px;
+  border:2px solid red;
 }
 
 #news-banner a:link {
